@@ -48,43 +48,150 @@
   letter-spacing: 0;
   text-transform: none;
 }
-.sdk-frame-header .header-cta {
+.sdk-frame-header .live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.sdk-frame-header .live-pill .dot-live {
+  width: 7px;
+  height: 7px;
+  background: #22C55E;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  animation: pulseDotLive 1.6s infinite;
+}
+@keyframes pulseDotLive {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* === FLOATING CART BAR — pops up when cart has items === */
+.floating-cart {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 16px 48px rgba(31, 42, 27, 0.25), 0 2px 8px rgba(31, 42, 27, 0.08);
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
+  padding: 0.9rem 0.9rem 0.9rem 1.4rem;
+  min-width: 380px;
+  max-width: 95vw;
+  border: 1px solid var(--border-light);
+  animation: floatCartIn 0.5s cubic-bezier(0.2, 1.5, 0.4, 1);
+  will-change: transform, opacity;
 }
-.sdk-frame-header .header-total {
-  text-align: right;
+@keyframes floatCartIn {
+  from { transform: translate(-50%, 120%); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+.fc-items-count {
+  background: var(--bg-cream);
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.fc-items-count .num {
   font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: white;
+  color: var(--primary);
   line-height: 1;
 }
-.sdk-frame-header .header-total-sub {
-  font-size: 0.7rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  opacity: 0.8;
+.fc-items-count .label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 4px;
+  margin-top: 2px;
 }
-.sdk-frame-header .header-cta-btn {
+.fc-info {
+  flex: 1;
+  min-width: 0;
+}
+.fc-info .fc-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.fc-info .fc-total {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1;
+}
+.fc-info .fc-savings {
+  font-size: 0.72rem;
+  color: var(--secondary);
+  font-weight: 600;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.fc-cta {
   background: var(--primary);
   color: white;
   border: none;
-  padding: 12px 22px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 0.92rem;
-  cursor: pointer;
+  padding: 14px 26px;
+  border-radius: 12px;
   font-family: 'Inter', sans-serif;
-  transition: all 0.15s;
-  box-shadow: 0 4px 14px rgba(194, 83, 46, 0.4);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  box-shadow: 0 6px 18px rgba(194, 83, 46, 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
 }
-.sdk-frame-header .header-cta-btn:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-1px); }
-.sdk-frame-header .header-cta-btn:disabled { background: rgba(255,255,255,0.15); cursor: not-allowed; box-shadow: none; }
+.fc-cta:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(194, 83, 46, 0.55);
+}
+.fc-cta:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; transform: none; }
+.fc-cta .arrow {
+  transition: transform 0.2s;
+}
+.fc-cta:hover:not(:disabled) .arrow { transform: translateX(4px); }
+
+@media (max-width: 640px) {
+  .floating-cart {
+    bottom: 12px;
+    min-width: auto;
+    width: calc(100vw - 24px);
+    padding: 0.75rem 0.85rem;
+    gap: 0.75rem;
+  }
+  .fc-info .fc-total { font-size: 1.35rem; }
+  .fc-cta { padding: 12px 18px; font-size: 0.88rem; }
+  .fc-items-count { width: 38px; height: 38px; }
+  .fc-items-count .num { font-size: 1.1rem; }
+}
 
 .sdk-frame-body { padding: 2rem 3rem; }
 @media (max-width: 768px) { .sdk-frame-body { padding: 1.5rem 1.25rem; } }
@@ -276,40 +383,11 @@
 }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-/* Mobile floating bottom bar */
-.mobile-bottom-bar {
-  display: none;
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: white;
-  border-top: 1px solid var(--border-light);
-  padding: 12px 16px;
-  z-index: 50;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.mobile-bottom-bar .mb-total {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--primary);
-}
-.mobile-bottom-bar .mb-total .mb-sub {
-  display: block; font-size: 0.7rem; color: var(--text-muted);
-  font-family: 'Inter', sans-serif; font-weight: 500;
-}
-.mobile-bottom-bar button {
-  flex: 1; max-width: 200px;
-  background: var(--primary); color: white; border: none;
-  padding: 12px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;
-  font-family: 'Inter', sans-serif; font-size: 0.95rem;
-}
-@media (max-width: 980px) {
-  .mobile-bottom-bar { display: flex; }
-  body { padding-bottom: 80px; }
-}
+/* Alpine x-cloak guard */
+[x-cloak] { display: none !important; }
+
+/* Body padding so floating cart never covers content */
+body { padding-bottom: 120px; }
 </style>
 </head>
 <body>
@@ -340,22 +418,16 @@
 
 <div class="sdk-inline-frame" x-data="bookingFlow1()">
 
-  <!-- STICKY HEADER WITH RUNNING TOTAL + CTA -->
+  <!-- HEADER (clean — no CTA, just title + live indicator) -->
   <div class="sdk-frame-header">
     <div>
       <div class="label">Réservation · Les Terres de Nataé</div>
       <div class="label-sub">Composé via Smeetz Elements SDK · productIds 76037 + 76038</div>
     </div>
-    <div class="header-cta">
-      <div>
-        <div class="header-total" x-text="formatPrice(total)"></div>
-        <div class="header-total-sub" x-text="totalItems + ' article' + (totalItems > 1 ? 's' : '')"></div>
-      </div>
-      <button class="header-cta-btn" :disabled="total <= 0" @click="payClick()">
-        <span x-show="!processing">Réserver maintenant</span>
-        <span x-show="processing">Traitement…</span>
-      </button>
-    </div>
+    <span class="live-pill">
+      <span class="dot-live"></span>
+      <span>Live</span>
+    </span>
   </div>
 
   <div class="sdk-frame-body">
@@ -535,11 +607,6 @@
             <span class="price" x-text="formatPrice(total)"></span>
           </div>
 
-          <button class="sdk-pay-btn" :disabled="total <= 0" @click="payClick()">
-            <span x-show="!processing">Réserver · payer en sécurité</span>
-            <span x-show="processing">Traitement…</span>
-          </button>
-
           <div class="trust-badges">
             <span class="trust-badge">Annulation 24h</span>
             <span class="trust-badge">Note 4,8 / 5</span>
@@ -549,18 +616,33 @@
           <div style="margin-top:1rem; font-size:0.78rem; color:var(--text-muted); text-align:center;">
             🔒 Paiement sécurisé Stripe · CB, Apple Pay, Google Pay
           </div>
+
+          <div x-show="total <= 0" style="margin-top:1rem; padding:1rem; background:white; border:1px dashed var(--border-light); border-radius:8px; text-align:center; font-size:0.85rem; color:var(--text-muted);">
+            <span style="display:block; font-size:1.5rem; margin-bottom:6px;">🛒</span>
+            <span>Sélectionnez une date et au moins une personne pour voir le bouton de réservation apparaître.</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Mobile floating bottom bar -->
-  <div class="mobile-bottom-bar">
-    <div class="mb-total">
-      <span x-text="formatPrice(total)"></span>
-      <span class="mb-sub" x-text="totalItems + ' article' + (totalItems > 1 ? 's' : '')"></span>
+  <!-- FLOATING CART BAR — inside x-data, fixed-positioned, pops up only when cart has items -->
+  <div class="floating-cart" x-show="total > 0" x-transition.duration.500ms x-cloak>
+    <div class="fc-items-count">
+      <span class="num" x-text="totalItems"></span>
+      <span class="label">items</span>
     </div>
-    <button :disabled="total <= 0" @click="payClick()">Réserver</button>
+    <div class="fc-info">
+      <div class="fc-label">Votre panier</div>
+      <div class="fc-total" x-text="formatPrice(total)"></div>
+      <span class="fc-savings" x-show="dynamicDiscount > 0">
+        ⚡ <span x-text="'Économie ' + formatPrice(dynamicDiscount) + ' (off-peak)'"></span>
+      </span>
+    </div>
+    <button class="fc-cta" :disabled="processing" @click="payClick()">
+      <span x-show="!processing">Réserver et payer <span class="arrow">→</span></span>
+      <span x-show="processing">Traitement…</span>
+    </button>
   </div>
 </div>
 
