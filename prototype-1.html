@@ -10,6 +10,328 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<style>
+/* Smeetz Elements inline prototype */
+.sdk-inline-frame {
+  max-width: 1100px;
+  margin: -4rem auto 5rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(31, 42, 27, 0.18);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  position: relative;
+  z-index: 5;
+}
+.sdk-frame-header {
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+  color: white;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sdk-frame-header .label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sdk-frame-header .badges {
+  display: flex;
+  gap: 0.5rem;
+}
+.sdk-frame-header .badges span {
+  background: rgba(255,255,255,0.15);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+.sdk-frame-body {
+  padding: 2.5rem 3rem;
+}
+.sdk-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 900px) { .sdk-row { grid-template-columns: 1fr; gap: 2rem; } }
+
+.sdk-block-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sdk-block-title .num {
+  background: var(--primary);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Calendar */
+.calendar {
+  background: var(--bg-cream);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.calendar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.calendar-head .month {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.calendar-head button {
+  background: white;
+  border: 1px solid var(--border-light);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-dark);
+  transition: background 0.15s;
+}
+.calendar-head button:hover { background: var(--accent); border-color: var(--accent); color: white; }
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: white;
+  transition: all 0.15s;
+  position: relative;
+}
+.calendar-day:hover:not(.disabled) { background: var(--accent); color: white; }
+.calendar-day.disabled { color: #C5C8C0; cursor: not-allowed; background: transparent; }
+.calendar-day.selected { background: var(--primary); color: white; }
+.calendar-day.today { font-weight: 700; }
+.calendar-day.today::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.calendar-day.selected.today::after { background: white; }
+
+/* Time slots */
+.slots-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+  margin-top: 1rem;
+}
+.slot-btn {
+  background: white;
+  border: 1px solid var(--border-light);
+  padding: 10px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.slot-btn:hover { border-color: var(--primary); color: var(--primary); }
+.slot-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
+.slot-btn.low-price { position: relative; }
+.slot-btn.low-price::before {
+  content: '⚡';
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  background: var(--accent);
+  color: var(--text-dark);
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+/* Participants */
+.participant-row {
+  background: var(--bg-cream);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.participant-info .ptype {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+.participant-info .pdetail {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.counter button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+  background: white;
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 0;
+}
+.counter button:hover:not(:disabled) { background: var(--primary); color: white; }
+.counter button:disabled { opacity: 0.3; cursor: not-allowed; }
+.counter .count { min-width: 24px; text-align: center; font-weight: 600; font-size: 1.05rem; }
+
+/* Summary panel */
+.summary-panel {
+  background: var(--bg-cream);
+  border-radius: 14px;
+  padding: 1.75rem;
+  position: sticky;
+  top: 100px;
+}
+.summary-panel h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.92rem;
+  color: var(--text-body);
+}
+.summary-line.muted { color: var(--text-muted); font-size: 0.85rem; }
+.summary-line.total {
+  border-top: 1px solid var(--border-light);
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-dark);
+}
+.summary-line.total .price { color: var(--primary); font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+.summary-line.savings { color: var(--secondary); font-weight: 600; }
+
+.trust-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+.trust-badge {
+  font-size: 0.75rem;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  color: var(--secondary-dark);
+}
+.trust-badge::before {
+  content: '✓';
+  color: var(--secondary);
+  margin-right: 4px;
+  font-weight: 700;
+}
+
+.sdk-pay-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+  box-shadow: 0 4px 14px rgba(194, 83, 46, 0.35);
+}
+.sdk-pay-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+.sdk-pay-btn:disabled { background: #C5C8C0; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--secondary);
+  margin-top: 0.75rem;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.live-indicator .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--secondary);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+</style>
 </head>
 <body>
 
@@ -32,115 +354,226 @@
 <!-- SDK Hero -->
 <section class="sdk-hero">
   <div class="badge-row">
-    <span class="badge">Smeetz Elements</span>
-    <span class="badge">SDK Prototype</span>
+    <span class="badge">Smeetz Elements SDK</span>
+    <span class="badge" style="background:var(--accent)">Prototype 1 · Inline</span>
   </div>
-  <h1>Flux de réservation <em style="font-family:'Playfair Display'; font-style:italic; color:var(--accent);">inline immersif</em></h1>
-  <p>Plus de lightbox — le tunnel de réservation s'intègre directement dans la page produit. 100 % brandé, 100 % à votre design system. Idéal pour la billetterie principale du parc.</p>
+  <h1>Réserver son entrée parc — <em style="font-family:'Playfair Display'; font-style:italic; color:var(--accent);">sans quitter la page</em></h1>
+  <p>Le tunnel de réservation Smeetz Elements directement intégré dans la page. Pas de modal, pas de redirection. 100 % brandé Nataé.</p>
 </section>
 
-<!-- Prototype placeholder -->
-<div class="sdk-prototype-placeholder">
-  <div class="icon-big">🧩</div>
-  <h3>Prototype 1 — Inline Booking Flow</h3>
-  <p>Cet emplacement accueillera le composant Smeetz Elements généré via le skill <code style="display:inline-block; padding:2px 8px; background:var(--bg-cream); border-radius:4px;">smeetz-elements-booking-flow-creation</code>. Le tunnel complet (sélection date · participants · paiement) s'affiche directement ici, sans modal.</p>
+<!-- INLINE BOOKING PROTOTYPE -->
+<div class="sdk-inline-frame" x-data="bookingFlow1()">
+  <div class="sdk-frame-header">
+    <div>
+      <div class="label">Réservation · Entrée Parc Les Terres de Nataé</div>
+      <div style="font-size:0.78rem; opacity:0.8; margin-top:2px;">Composé via Smeetz Elements SDK · productId 76037</div>
+    </div>
+    <div class="badges">
+      <span>⚡ Live</span>
+      <span>🔒 SSL</span>
+    </div>
+  </div>
 
-  <code>
-    &lt;!-- Smeetz Elements SDK embed point --&gt;<br>
-    &lt;div id="smeetz-booking-inline"&gt;&lt;/div&gt;<br>
-    &lt;script src="https://elements.smeetz.com/sdk.js"&gt;&lt;/script&gt;<br>
-    &lt;script&gt;<br>
-    &nbsp;&nbsp;SmeetzElements.mount('#smeetz-booking-inline', {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;productId: '76037', // Entrée Parc<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;mode: 'inline',<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;theme: 'natae-light'<br>
-    &nbsp;&nbsp;});<br>
-    &lt;/script&gt;
-  </code>
+  <div class="sdk-frame-body">
+    <div class="sdk-row">
+      <!-- LEFT: Booking form -->
+      <div>
+        <!-- Step 1: Date -->
+        <div>
+          <div class="sdk-block-title">
+            <span class="num">1</span>
+            <span>Choisir une date de visite</span>
+          </div>
+          <div class="calendar">
+            <div class="calendar-head">
+              <button @click="prevMonth()">‹</button>
+              <span class="month" x-text="monthLabel"></span>
+              <button @click="nextMonth()">›</button>
+            </div>
+            <div class="calendar-days">
+              <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+            </div>
+            <div class="calendar-grid">
+              <template x-for="d in calendarDays" :key="d.key">
+                <div
+                  class="calendar-day"
+                  :class="{ 'disabled': d.disabled, 'selected': d.selected, 'today': d.today }"
+                  @click="selectDate(d)"
+                  x-text="d.day || ''"></div>
+              </template>
+            </div>
+          </div>
 
-  <div style="margin-top:2rem; padding:1.5rem; background:var(--secondary); color:white; border-radius:8px;">
-    <strong style="display:block; margin-bottom:0.5rem; font-family:'Playfair Display';">🎯 Pourquoi montrer ce flux à Nataé</strong>
-    <p style="margin:0; opacity:0.95; font-size:0.95rem;">Démontre que Smeetz peut aller au-delà du widget standard : composition 100 % custom, intégration native dans le site existant, expérience utilisateur sans rupture. Différenciateur fort vs Qweekle (widget-only).</p>
+          <!-- Time slots -->
+          <div x-show="selectedDate" x-transition style="margin-top:1.5rem;">
+            <div class="sdk-block-title">
+              <span class="num">2</span>
+              <span>Créneau d'arrivée</span>
+            </div>
+            <div class="slots-row">
+              <template x-for="slot in slots" :key="slot.time">
+                <button
+                  class="slot-btn"
+                  :class="{ 'selected': selectedSlot === slot.time, 'low-price': slot.lowPrice }"
+                  @click="selectedSlot = slot.time"
+                  x-text="slot.time"></button>
+              </template>
+            </div>
+            <div class="live-indicator">
+              <span class="dot"></span>
+              <span>Dynamic Pricing actif · prix optimisés en temps réel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Participants -->
+        <div x-show="selectedSlot" x-transition style="margin-top:2rem;">
+          <div class="sdk-block-title">
+            <span class="num">3</span>
+            <span>Combien êtes-vous ?</span>
+          </div>
+
+          <div class="participant-row">
+            <div class="participant-info">
+              <div class="ptype">Adulte</div>
+              <div class="pdetail">+12 ans · 25,90 €</div>
+            </div>
+            <div class="counter">
+              <button @click="adults = Math.max(0, adults - 1)" :disabled="adults <= 0">−</button>
+              <span class="count" x-text="adults"></span>
+              <button @click="adults++">+</button>
+            </div>
+          </div>
+
+          <div class="participant-row">
+            <div class="participant-info">
+              <div class="ptype">Enfant</div>
+              <div class="pdetail">3-11 ans · 19,90 €</div>
+            </div>
+            <div class="counter">
+              <button @click="children = Math.max(0, children - 1)" :disabled="children <= 0">−</button>
+              <span class="count" x-text="children"></span>
+              <button @click="children++">+</button>
+            </div>
+          </div>
+
+          <div class="participant-row">
+            <div class="participant-info">
+              <div class="ptype">Enfant moins de 3 ans</div>
+              <div class="pdetail">Gratuit · livret de famille</div>
+            </div>
+            <div class="counter">
+              <button @click="toddlers = Math.max(0, toddlers - 1)" :disabled="toddlers <= 0">−</button>
+              <span class="count" x-text="toddlers"></span>
+              <button @click="toddlers++">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Summary -->
+      <div>
+        <div class="summary-panel">
+          <h3>🌿 Récap</h3>
+
+          <div class="summary-line muted">
+            <span x-text="selectedDate ? formatDate(selectedDate) : 'Aucune date'"></span>
+            <span x-text="selectedSlot || ''"></span>
+          </div>
+
+          <div class="summary-line" x-show="adults > 0">
+            <span><span x-text="adults"></span> × Adulte</span>
+            <span x-text="formatPrice(adults * 25.90)"></span>
+          </div>
+
+          <div class="summary-line" x-show="children > 0">
+            <span><span x-text="children"></span> × Enfant</span>
+            <span x-text="formatPrice(children * 19.90)"></span>
+          </div>
+
+          <div class="summary-line muted" x-show="toddlers > 0">
+            <span><span x-text="toddlers"></span> × Tout-petit</span>
+            <span>Gratuit</span>
+          </div>
+
+          <div class="summary-line savings" x-show="dynamicDiscount > 0">
+            <span>⚡ Off-peak pricing</span>
+            <span x-text="'−' + formatPrice(dynamicDiscount)"></span>
+          </div>
+
+          <div class="summary-line muted" x-show="subtotal > 0">
+            <span>TVA 5,5 %</span>
+            <span x-text="formatPrice(vat)"></span>
+          </div>
+
+          <div class="summary-line total">
+            <span>Total TTC</span>
+            <span class="price" x-text="formatPrice(total)"></span>
+          </div>
+
+          <button class="sdk-pay-btn" :disabled="total <= 0" @click="payClick()">
+            <span x-show="!processing">Réserver · payer en sécurité</span>
+            <span x-show="processing">Traitement…</span>
+          </button>
+
+          <div class="trust-badges">
+            <span class="trust-badge">Annulation 24h</span>
+            <span class="trust-badge">Note 4,8 / 5</span>
+            <span class="trust-badge">Soutient la conservation</span>
+          </div>
+
+          <div style="margin-top:1rem; font-size:0.78rem; color:var(--text-muted); text-align:center;">
+            🔒 Paiement sécurisé Stripe · CB, Apple Pay, Google Pay
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Use case explainer -->
+<!-- Comparison cards below the prototype -->
 <section class="product-section alt-bg">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-eyebrow">Cas d'usage</span>
-      <h2>Pour quelle situation ce flux ?</h2>
+      <span class="section-eyebrow">Ce que ce prototype démontre</span>
+      <h2>Inline = friction zéro</h2>
     </div>
 
     <div class="product-grid">
       <div class="product-card" style="padding:2rem;">
         <div style="font-size:2.5rem; margin-bottom:0.75rem;">⚡</div>
-        <h3>Conversion maximale</h3>
-        <p>Pas de clic supplémentaire pour ouvrir un modal — l'utilisateur voit le tunnel dès l'arrivée sur la page. Réduit le drop-off entre intention et achat.</p>
+        <h3>Pas de modal</h3>
+        <p>Le tunnel s'affiche directement dans la page produit. Pas de clic supplémentaire, pas de pop-up bloquant. Mobile-first.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">💰</div>
+        <h3>Dynamic Pricing live</h3>
+        <p>Tarifs optimisés en temps réel selon occupation prévue (créneau 10h-12h moins cher que 14h-16h). Connecté à l'IA Smeetz.</p>
       </div>
       <div class="product-card" style="padding:2rem;">
         <div style="font-size:2.5rem; margin-bottom:0.75rem;">🎨</div>
-        <h3>Design 100 % cohérent</h3>
-        <p>Hérite des fonts, couleurs et composants de votre design system. Le tunnel respire le même air que le reste du site.</p>
+        <h3>100 % design Nataé</h3>
+        <p>Hérite des fonts, couleurs, composants du site. Aucun élément Smeetz visible — le tunnel respire la marque.</p>
       </div>
       <div class="product-card" style="padding:2rem;">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">📱</div>
-        <h3>Mobile-first</h3>
-        <p>Composants Smeetz Elements optimisés mobile (60 % du trafic Nataé). Pas de modal qui prend tout l'écran sur smartphone.</p>
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">📊</div>
+        <h3>Analytics natif</h3>
+        <p>Drop-off rate par étape, A/B testing de UI, intégration GA4 / GTM hors-box. Pas natif sur Qweekle.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Comparison -->
-<section class="product-section">
-  <div class="section-inner">
-    <div class="section-header" style="align-items:center; text-align:center;">
-      <span class="section-eyebrow">Widget vs SDK</span>
-      <h2>Quand choisir l'un ou l'autre</h2>
-    </div>
-
-    <div style="overflow-x:auto;">
-      <table style="width:100%; max-width:900px; margin:0 auto; border-collapse:collapse; background:white; border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-soft);">
-        <thead>
-          <tr style="background:var(--secondary); color:white;">
-            <th style="padding:1rem; text-align:left;">Critère</th>
-            <th style="padding:1rem; text-align:center;">Widget</th>
-            <th style="padding:1rem; text-align:center;">SDK Elements</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border-light);">
-            <td style="padding:1rem;"><strong>Temps de mise en place</strong></td>
-            <td style="padding:1rem; text-align:center;">⚡ Quelques minutes</td>
-            <td style="padding:1rem; text-align:center;">🛠️ Quelques jours</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border-light); background:var(--bg-cream);">
-            <td style="padding:1rem;"><strong>Personnalisation visuelle</strong></td>
-            <td style="padding:1rem; text-align:center;">Limitée aux couleurs</td>
-            <td style="padding:1rem; text-align:center;">✨ Totale</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border-light);">
-            <td style="padding:1rem;"><strong>Intégration site existant</strong></td>
-            <td style="padding:1rem; text-align:center;">Modal/lightbox</td>
-            <td style="padding:1rem; text-align:center;">Inline natif</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--border-light); background:var(--bg-cream);">
-            <td style="padding:1rem;"><strong>Mise à jour produits</strong></td>
-            <td style="padding:1rem; text-align:center;">Auto (back-office)</td>
-            <td style="padding:1rem; text-align:center;">Auto (back-office)</td>
-          </tr>
-          <tr>
-            <td style="padding:1rem;"><strong>Idéal pour</strong></td>
-            <td style="padding:1rem; text-align:center;">Lancement rapide</td>
-            <td style="padding:1rem; text-align:center;">Site premium / haute conversion</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔌</div>
+        <h3>API-first</h3>
+        <p>Toute la mécanique (catalogue, créneaux, paiement) exposée en REST + Webhooks. Vous pouvez aller plus loin si besoin.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🚀</div>
+        <h3>Time-to-market 5j</h3>
+        <p>Intégration faite en moins d'une semaine avec un dev front-end. Documentation Smeetz Elements complète, exemples React/Vue inclus.</p>
+      </div>
     </div>
 
     <div style="text-align:center; margin-top:3rem;">
-      <a href="prototype-2.html" class="btn-primary">Voir le prototype 2 →</a>
+      <a href="prototype-2.html" class="btn-primary">Voir le prototype 2 — Stepper Gift Card →</a>
     </div>
   </div>
 </section>
@@ -165,7 +598,7 @@
       <h4>SDK Prototypes</h4>
       <ul>
         <li><a href="prototype-1.html">Prototype 1 — Inline</a></li>
-        <li><a href="prototype-2.html">Prototype 2 — Multi-étapes</a></li>
+        <li><a href="prototype-2.html">Prototype 2 — Stepper</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -181,7 +614,102 @@
   </div>
 </footer>
 
-<div class="demo-banner">🧩 SDK PROTOTYPE 1</div>
+<div class="demo-banner">🧩 SDK PROTOTYPE 1 · INLINE</div>
+
+<script>
+function bookingFlow1() {
+  const today = new Date();
+  return {
+    currentMonth: today.getMonth(),
+    currentYear: today.getFullYear(),
+    selectedDate: null,
+    selectedSlot: null,
+    adults: 0,
+    children: 0,
+    toddlers: 0,
+    processing: false,
+    slots: [
+      { time: '10:00', lowPrice: true },
+      { time: '11:00', lowPrice: true },
+      { time: '12:00', lowPrice: false },
+      { time: '13:00', lowPrice: false },
+      { time: '14:00', lowPrice: false },
+      { time: '15:00', lowPrice: false },
+      { time: '16:00', lowPrice: false },
+      { time: '17:00', lowPrice: true },
+    ],
+    monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+    get monthLabel() { return this.monthNames[this.currentMonth] + ' ' + this.currentYear; },
+    get calendarDays() {
+      const first = new Date(this.currentYear, this.currentMonth, 1);
+      const last = new Date(this.currentYear, this.currentMonth + 1, 0);
+      let startDay = first.getDay() - 1; // Monday-based
+      if (startDay < 0) startDay = 6;
+      const days = [];
+      for (let i = 0; i < startDay; i++) {
+        days.push({ key: 'p' + i, day: '', disabled: true });
+      }
+      for (let d = 1; d <= last.getDate(); d++) {
+        const dt = new Date(this.currentYear, this.currentMonth, d);
+        const todayDate = new Date();
+        todayDate.setHours(0,0,0,0);
+        const past = dt < todayDate;
+        days.push({
+          key: 'd' + d,
+          day: d,
+          disabled: past,
+          today: dt.toDateString() === new Date().toDateString(),
+          selected: this.selectedDate && dt.toDateString() === this.selectedDate.toDateString(),
+        });
+      }
+      return days;
+    },
+    prevMonth() {
+      if (this.currentMonth === 0) { this.currentMonth = 11; this.currentYear--; }
+      else { this.currentMonth--; }
+    },
+    nextMonth() {
+      if (this.currentMonth === 11) { this.currentMonth = 0; this.currentYear++; }
+      else { this.currentMonth++; }
+    },
+    selectDate(d) {
+      if (d.disabled || !d.day) return;
+      this.selectedDate = new Date(this.currentYear, this.currentMonth, d.day);
+    },
+    formatDate(d) {
+      return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+    },
+    formatPrice(p) {
+      return p.toFixed(2).replace('.', ',') + ' €';
+    },
+    get subtotal() {
+      return this.adults * 25.90 + this.children * 19.90;
+    },
+    get dynamicDiscount() {
+      // Apply 12% off for off-peak slots (10h, 11h, 17h)
+      if (!this.selectedSlot) return 0;
+      const off = ['10:00', '11:00', '17:00'].includes(this.selectedSlot);
+      return off ? this.subtotal * 0.12 : 0;
+    },
+    get totalBeforeVat() {
+      return this.subtotal - this.dynamicDiscount;
+    },
+    get vat() {
+      return this.totalBeforeVat * 0.055 / 1.055;
+    },
+    get total() {
+      return this.totalBeforeVat;
+    },
+    payClick() {
+      this.processing = true;
+      setTimeout(() => {
+        alert('✅ Réservation simulée — en démo réelle, Stripe Elements ouvrirait la sheet de paiement.');
+        this.processing = false;
+      }, 1500);
+    }
+  };
+}
+</script>
 
 </body>
 </html>
