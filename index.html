@@ -39,8 +39,16 @@
   </nav>
 </div>
 
-<!-- Hero -->
+<!-- Hero with slideshow -->
 <section class="hero">
+  <div class="hero-slideshow">
+    <div class="hero-slide" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-5.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-6.jpg');"></div>
+  </div>
+  <div class="hero-overlay"></div>
+
   <div class="hero-content">
     <span class="hero-tagline">Parc refuge de Bretagne · Pont-Scorff</span>
     <h1>Le sanctuaire des <em>espèces menacées</em>.</h1>
@@ -58,25 +66,27 @@
       <a href="#experiences" class="btn-ghost">Découvrir les expériences</a>
     </div>
   </div>
+
+  <div class="scroll-indicator">Découvrir Nataé</div>
 </section>
 
-<!-- Stats bar -->
+<!-- Stats bar with animated counters -->
 <section class="stats-bar">
   <div class="stats-grid">
-    <div class="stat-item">
-      <span class="number">120</span>
+    <div class="stat-item" data-reveal>
+      <span class="number" data-counter="120" data-suffix="">0</span>
       <span class="label">espèces hébergées</span>
     </div>
-    <div class="stat-item">
-      <span class="number">60 %</span>
+    <div class="stat-item" data-reveal style="--reveal-delay:0.1s">
+      <span class="number" data-counter="60" data-suffix=" %">0</span>
       <span class="label">espèces menacées</span>
     </div>
-    <div class="stat-item">
-      <span class="number">14 ha</span>
+    <div class="stat-item" data-reveal style="--reveal-delay:0.2s">
+      <span class="number" data-counter="14" data-suffix=" ha">0</span>
       <span class="label">de forêt-refuge</span>
     </div>
-    <div class="stat-item">
-      <span class="number">285k</span>
+    <div class="stat-item" data-reveal style="--reveal-delay:0.3s">
+      <span class="number" data-counter="285" data-suffix="k">0</span>
       <span class="label">visiteurs par an</span>
     </div>
   </div>
@@ -85,13 +95,13 @@
 <!-- ====== Billetterie ====== -->
 <section id="billetterie" class="product-section">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <span class="section-eyebrow">Billetterie</span>
       <h2>Une journée au cœur du parc refuge</h2>
       <p>Cinq heures de visite en moyenne, soigneurs présents sur le terrain, animations tout au long de la journée. Une entrée Nataé soutient directement la conservation des espèces les plus menacées.</p>
     </div>
 
-    <div class="product-grid">
+    <div class="product-grid stagger" data-reveal>
       <div class="product-card">
         <img class="card-image" src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg" alt="Pandas roux">
         <div class="card-body">
@@ -123,7 +133,7 @@
       </div>
     </div>
 
-    <div style="text-align:center; margin-top: 3rem;">
+    <div style="text-align:center; margin-top: 3rem;" data-reveal>
       <!-- 🎟️ SMEETZ: Entrée Parc Nataé (wid 5351) -->
       <a href="#" class="btn-primary"
          onclick="event.preventDefault(); _smtz('openwidget', 1 * new Date(), {
@@ -137,49 +147,87 @@
   </div>
 </section>
 
+<!-- ====== Photo marquee (les espèces du parc) ====== -->
+<section class="photo-marquee">
+  <div style="max-width:1280px; margin: 0 auto 3rem; padding: 0 2rem; text-align:center; position:relative; z-index:3;" data-reveal>
+    <span class="section-eyebrow" style="color: var(--accent);">Les 120 espèces protégées</span>
+    <h2 style="color:white; margin-top: 0.5rem;">Refuge breton pour la biodiversité menacée</h2>
+  </div>
+  <div class="marquee-track">
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg" alt="Panda roux">
+      <div class="caption">Panda Roux</div>
+    </div>
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg" alt="Panthère du Sri Lanka">
+      <div class="caption">Panthère du Sri Lanka</div>
+    </div>
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-6.jpg" alt="Éléphant d'Asie">
+      <div class="caption">Éléphant d'Asie</div>
+    </div>
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-5.jpg" alt="Ara hyacinthe">
+      <div class="caption">Ara Hyacinthe</div>
+    </div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg" alt="Panda roux">
+      <div class="caption">Panda Roux</div>
+    </div>
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg" alt="Panthère du Sri Lanka">
+      <div class="caption">Panthère du Sri Lanka</div>
+    </div>
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-6.jpg" alt="Éléphant d'Asie">
+      <div class="caption">Éléphant d'Asie</div>
+    </div>
+    <div class="marquee-item">
+      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-5.jpg" alt="Ara hyacinthe">
+      <div class="caption">Ara Hyacinthe</div>
+    </div>
+  </div>
+</section>
+
 <!-- ====== Soigneur d'un Jour ====== -->
-<section id="experiences" class="product-section alt-bg">
+<section id="experiences" class="product-section">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <span class="section-eyebrow">Expériences premium</span>
       <h2>Devenir soigneur le temps d'<em style="font-family:'Playfair Display'; font-style:italic; color:var(--primary);">une journée</em></h2>
       <p>Cinq formats au choix pour entrer dans le quotidien des soigneurs Nataé. Préparation des repas, observation animale, soins quotidiens — encadré par l'équipe du parc.</p>
     </div>
 
-    <div class="soigneur-grid">
-      <div class="soigneur-format">
-        <div class="icon">🌅</div>
-        <h4>Matinée Animalière</h4>
+    <div class="soigneur-grid stagger" data-reveal>
+      <div class="soigneur-format-rich" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg');">
+        <h4>🌅 Matinée Animalière</h4>
         <div class="schedule">8h30 – 12h30 · 4 pers max</div>
         <div class="price">dès 105 €</div>
       </div>
-      <div class="soigneur-format">
-        <div class="icon">🌆</div>
-        <h4>Soirée Sauvage</h4>
+      <div class="soigneur-format-rich" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg');">
+        <h4>🌆 Soirée Sauvage</h4>
         <div class="schedule">Après-midi · 4 pers max</div>
         <div class="price">dès 110 €</div>
       </div>
-      <div class="soigneur-format">
-        <div class="icon">🦁</div>
-        <h4>Vis Ma Vie</h4>
+      <div class="soigneur-format-rich" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-6.jpg');">
+        <h4>🦁 Vis Ma Vie</h4>
         <div class="schedule">Journée entière · 1 pers/jour</div>
         <div class="price">195 €</div>
       </div>
-      <div class="soigneur-format">
-        <div class="icon">🌱</div>
-        <h4>Soigneur en Herbe</h4>
+      <div class="soigneur-format-rich" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-5.jpg');">
+        <h4>🌱 Soigneur en Herbe</h4>
         <div class="schedule">6-10 ans · 14h30-16h30</div>
         <div class="price">49 €</div>
       </div>
-      <div class="soigneur-format">
-        <div class="icon">👁️</div>
-        <h4>Moment Sauvage</h4>
+      <div class="soigneur-format-rich" style="background-image:url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg');">
+        <h4>👁️ Moment Sauvage</h4>
         <div class="schedule">Rencontre 20 min · 6 ans+</div>
         <div class="price">dès 50 €</div>
       </div>
     </div>
 
-    <div style="text-align:center;">
+    <div style="text-align:center; margin-top: 3rem;" data-reveal>
       <!-- 🎟️ SMEETZ: Soigneur d'un Jour (wid 5352) -->
       <a href="#" class="btn-primary"
          onclick="event.preventDefault(); _smtz('openwidget', 1 * new Date(), {
@@ -195,11 +243,11 @@
 </section>
 
 <!-- ====== Pass Annuel ====== -->
-<section id="pass-annuel" class="product-section">
+<section id="pass-annuel" class="product-section alt-bg">
   <div class="section-inner">
     <div class="featured-product">
-      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg" alt="Pass Annuel Nataé">
-      <div class="featured-content">
+      <img data-reveal="left" src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg" alt="Pass Annuel Nataé">
+      <div class="featured-content" data-reveal="right">
         <span class="section-eyebrow">Membre Nataé</span>
         <h3>Pass Annuel — 12 mois d'accès illimité</h3>
         <p>Pour celles et ceux qui reviennent au fil des saisons. Le Pass Annuel Nataé donne accès au parc sans limite, avec entrée anticipée 15 minutes avant la fermeture et –10 % sur la boutique et les expériences Soigneur d'un Jour.</p>
@@ -225,18 +273,18 @@
 </section>
 
 <!-- ====== Bon Cadeau teaser ====== -->
-<section class="cta-band">
+<section class="cta-band" data-reveal>
   <h2>Offrir Nataé</h2>
   <p>Quatre visuels au choix — panda roux, panthère du Sri Lanka, ara hyacinthe, éléphant. Bon cadeau valable 12 mois sur l'entrée parc ou les expériences Soigneur d'un Jour.</p>
   <a href="bon-cadeau.html" class="btn-ghost" style="border-color:white;color:white;">Voir les bons cadeaux</a>
 </section>
 
 <!-- ====== CSE / Entreprises ====== -->
-<section id="cse" class="product-section alt-bg">
+<section id="cse" class="product-section">
   <div class="section-inner">
     <div class="featured-product reverse">
-      <img src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg" alt="CSE Nataé">
-      <div class="featured-content">
+      <img data-reveal="right" src="https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg" alt="CSE Nataé">
+      <div class="featured-content" data-reveal="left">
         <span class="section-eyebrow">CSE · COS · COE · Amicale</span>
         <h3>E-Pass Nataé pour votre comité d'entreprise</h3>
         <p>Offrez à vos salariés un accès au parc refuge breton à tarif négocié, sans contrainte de date. Le salarié reçoit son e-billet par e-mail, valable 12 mois, utilisable n'importe quel jour d'ouverture.</p>
@@ -261,34 +309,40 @@
   </div>
 </section>
 
-<!-- ====== SDK Prototypes teaser ====== -->
-<section class="product-section">
+<!-- ====== SDK Prototypes ====== -->
+<section class="product-section dark-bg">
   <div class="section-inner">
-    <div class="section-header">
-      <span class="section-eyebrow">Au-delà du widget</span>
-      <h2>Deux flux de réservation <em style="font-family:'Playfair Display'; font-style:italic; color:var(--primary);">construits sur mesure</em></h2>
-      <p>Smeetz Elements (SDK) permet d'aller plus loin que les widgets standard — composer un tunnel de réservation 100 % intégré à votre site, avec votre design system. Découvrez deux prototypes brandés Nataé.</p>
+    <div class="section-header" data-reveal>
+      <span class="section-eyebrow"><span class="pulse-dot"></span>Au-delà du widget</span>
+      <h2>Deux flux de réservation <em style="font-family:'Playfair Display'; font-style:italic; color:var(--accent);">construits sur mesure</em></h2>
+      <p>Smeetz Elements (SDK) permet d'aller plus loin que les widgets — composer un tunnel de réservation 100 % intégré à votre site, avec votre design system. <strong style="color:white;">Deux parcours différents</strong>, mêmes produits, démontrent la modularité totale du SDK.</p>
     </div>
 
-    <div class="product-grid">
+    <div class="product-grid stagger" data-reveal>
       <div class="product-card" style="text-align:center;">
-        <div style="height:180px; background: linear-gradient(135deg, var(--secondary), var(--secondary-dark)); display:flex; align-items:center; justify-content:center; color:white; font-family:'Playfair Display'; font-size:2rem; font-style:italic;">SDK Demo 1</div>
+        <div style="height:200px; background-image: linear-gradient(135deg, rgba(45,95,76,0.85), rgba(31,42,27,0.85)), url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg'); background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center; color:white; font-family:'Playfair Display'; font-size:2rem; font-style:italic; position:relative;">SDK Demo 1<span style="position:absolute; top:12px; right:12px; background:var(--accent); color:var(--text-dark); padding:4px 10px; border-radius:12px; font-size:0.7rem; font-family:Inter; font-style:normal; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;">Browse + Cart</span></div>
         <div class="card-body">
           <span class="card-tag">Smeetz Elements</span>
-          <h3>Flux inline immersif</h3>
-          <p>Tunnel de réservation directement embarqué dans la page, sans lightbox. Idéal pour l'entrée parc.</p>
+          <h3>Tunnel inline avec upsells</h3>
+          <p>Parcours e-commerce classique : sélection date / créneau / participants, puis section upsells Soigneur d'un Jour. Cart sticky, CTA toujours visible. Conversion maximale.</p>
           <a href="prototype-1.html" class="btn-primary btn-block">Voir le prototype 1</a>
         </div>
       </div>
       <div class="product-card" style="text-align:center;">
-        <div style="height:180px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display:flex; align-items:center; justify-content:center; color:white; font-family:'Playfair Display'; font-size:2rem; font-style:italic;">SDK Demo 2</div>
+        <div style="height:200px; background-image: linear-gradient(135deg, rgba(194,83,46,0.85), rgba(164,66,31,0.85)), url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg'); background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center; color:white; font-family:'Playfair Display'; font-size:2rem; font-style:italic; position:relative;">SDK Demo 2<span style="position:absolute; top:12px; right:12px; background:var(--accent); color:var(--text-dark); padding:4px 10px; border-radius:12px; font-size:0.7rem; font-family:Inter; font-style:normal; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;">Wizard guidé</span></div>
         <div class="card-body">
           <span class="card-tag">Smeetz Elements</span>
-          <h3>Flux multi-étapes guidé</h3>
-          <p>Booking flow avancé en plusieurs étapes pour les expériences Soigneur d'un Jour ou les bons cadeaux.</p>
+          <h3>Wizard mobile-app style</h3>
+          <p>Parcours conversationnel en 4 étapes guidées, full-screen, mobile-first. Idéal pour première visite, public familial. Mêmes produits (entrée + Soigneur), UX radicalement différente.</p>
           <a href="prototype-2.html" class="btn-primary btn-block">Voir le prototype 2</a>
         </div>
       </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 2.5rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);" data-reveal>
+      <p style="color: rgba(255,255,255,0.9); margin:0; max-width:700px; margin-inline:auto; font-size:0.95rem;">
+        <strong style="color:var(--accent); font-family:'Playfair Display'; font-style:italic;">Même produits, deux chemins.</strong> Démontre que Smeetz Elements n'impose pas un seul tunnel — vous composez le parcours qui correspond à votre audience, à votre marque, à votre objectif de conversion.
+      </p>
     </div>
   </div>
 </section>
@@ -336,6 +390,49 @@
 </footer>
 
 <div class="demo-banner">🎬 DEMO SMEETZ</div>
+
+<!-- Scroll reveal + counter animation -->
+<script>
+// IntersectionObserver for scroll reveals
+const revealEls = document.querySelectorAll('[data-reveal]');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+revealEls.forEach(el => io.observe(el));
+
+// Animated counters
+const counters = document.querySelectorAll('[data-counter]');
+const counterIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.counter, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1600;
+    const start = performance.now();
+    const animate = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.floor(eased * target);
+      el.textContent = value + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        el.textContent = target + suffix;
+        el.parentElement.classList.add('counted');
+      }
+    };
+    requestAnimationFrame(animate);
+    counterIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterIO.observe(c));
+</script>
 
 </body>
 </html>

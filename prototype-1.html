@@ -14,11 +14,11 @@
 <style>
 /* Smeetz Elements inline prototype */
 .sdk-inline-frame {
-  max-width: 1100px;
-  margin: -4rem auto 5rem;
+  max-width: 1180px;
+  margin: -4rem auto 3rem;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 24px 80px rgba(31, 42, 27, 0.18);
+  box-shadow: 0 24px 80px rgba(31, 42, 27, 0.22);
   overflow: hidden;
   border: 1px solid var(--border-light);
   position: relative;
@@ -27,41 +27,78 @@
 .sdk-frame-header {
   background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
   color: white;
-  padding: 1.25rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 .sdk-frame-header .label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.sdk-frame-header .badges {
+.sdk-frame-header .label-sub {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  margin-top: 2px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.sdk-frame-header .header-cta {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
 }
-.sdk-frame-header .badges span {
-  background: rgba(255,255,255,0.15);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.75rem;
+.sdk-frame-header .header-total {
+  text-align: right;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
 }
-.sdk-frame-body {
-  padding: 2.5rem 3rem;
+.sdk-frame-header .header-total-sub {
+  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
 }
+.sdk-frame-header .header-cta-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+  box-shadow: 0 4px 14px rgba(194, 83, 46, 0.4);
+}
+.sdk-frame-header .header-cta-btn:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-1px); }
+.sdk-frame-header .header-cta-btn:disabled { background: rgba(255,255,255,0.15); cursor: not-allowed; box-shadow: none; }
+
+.sdk-frame-body { padding: 2rem 3rem; }
+@media (max-width: 768px) { .sdk-frame-body { padding: 1.5rem 1.25rem; } }
+
 .sdk-row {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 3rem;
-  margin-top: 1.5rem;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2.5rem;
 }
-@media (max-width: 900px) { .sdk-row { grid-template-columns: 1fr; gap: 2rem; } }
+@media (max-width: 980px) { .sdk-row { grid-template-columns: 1fr; gap: 1.5rem; } }
 
 .sdk-block-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: var(--text-dark);
   margin-bottom: 1rem;
   display: flex;
@@ -80,262 +117,203 @@
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
+  flex-shrink: 0;
 }
+.sdk-block-section { margin-bottom: 2.5rem; }
 
 /* Calendar */
-.calendar {
-  background: var(--bg-cream);
-  border-radius: 12px;
-  padding: 1.25rem;
-}
+.calendar { background: var(--bg-cream); border-radius: 12px; padding: 1.25rem; }
 .calendar-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;
 }
-.calendar-head .month {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
+.calendar-head .month { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.1rem; }
 .calendar-head button {
-  background: white;
-  border: 1px solid var(--border-light);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1rem;
-  color: var(--text-dark);
-  transition: background 0.15s;
+  background: white; border: 1px solid var(--border-light); width: 32px; height: 32px;
+  border-radius: 50%; cursor: pointer; font-size: 1rem; color: var(--text-dark); transition: background 0.15s;
 }
 .calendar-head button:hover { background: var(--accent); border-color: var(--accent); color: white; }
-
 .calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
-  text-align: center;
-  font-weight: 600;
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+  font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;
+  text-align: center; font-weight: 600;
 }
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-}
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
 .calendar-day {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background: white;
-  transition: all 0.15s;
-  position: relative;
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500;
+  background: white; transition: all 0.15s; position: relative;
 }
 .calendar-day:hover:not(.disabled) { background: var(--accent); color: white; }
 .calendar-day.disabled { color: #C5C8C0; cursor: not-allowed; background: transparent; }
 .calendar-day.selected { background: var(--primary); color: white; }
 .calendar-day.today { font-weight: 700; }
 .calendar-day.today::after {
-  content: '';
-  position: absolute;
-  bottom: 3px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent);
+  content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 50%; background: var(--accent);
 }
 .calendar-day.selected.today::after { background: white; }
 
-/* Time slots */
 .slots-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 8px;
-  margin-top: 1rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px; margin-top: 1rem;
 }
 .slot-btn {
-  background: white;
-  border: 1px solid var(--border-light);
-  padding: 10px 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all 0.15s;
+  background: white; border: 1px solid var(--border-light); padding: 10px 8px;
+  border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.15s;
 }
 .slot-btn:hover { border-color: var(--primary); color: var(--primary); }
 .slot-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
 .slot-btn.low-price { position: relative; }
 .slot-btn.low-price::before {
-  content: '⚡';
-  position: absolute;
-  top: -8px;
-  right: -4px;
-  background: var(--accent);
-  color: var(--text-dark);
-  font-size: 0.7rem;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: 700;
+  content: '⚡'; position: absolute; top: -8px; right: -4px;
+  background: var(--accent); color: var(--text-dark); font-size: 0.7rem;
+  width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-weight: 700;
 }
 
-/* Participants */
 .participant-row {
-  background: var(--bg-cream);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
+  background: var(--bg-cream); border-radius: 10px; padding: 1rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;
 }
-.participant-info .ptype {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--text-dark);
-}
-.participant-info .pdetail {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-.counter {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.participant-info .ptype { font-weight: 600; font-size: 1rem; color: var(--text-dark); }
+.participant-info .pdetail { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+.counter { display: flex; align-items: center; gap: 12px; }
 .counter button {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1.5px solid var(--primary);
-  background: white;
-  color: var(--primary);
-  font-size: 1.2rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.15s;
-  line-height: 0;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--primary); background: white; color: var(--primary);
+  font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: all 0.15s; line-height: 0;
 }
 .counter button:hover:not(:disabled) { background: var(--primary); color: white; }
 .counter button:disabled { opacity: 0.3; cursor: not-allowed; }
 .counter .count { min-width: 24px; text-align: center; font-weight: 600; font-size: 1.05rem; }
 
+/* Upsell cards (Soigneur d'un Jour) */
+.upsell-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+.upsell-card {
+  display: grid; grid-template-columns: 100px 1fr auto; gap: 1rem; align-items: center;
+  padding: 1rem; border: 1.5px solid var(--border-light); border-radius: 12px;
+  cursor: pointer; transition: all 0.2s; background: white;
+}
+.upsell-card:hover { border-color: var(--primary); box-shadow: 0 4px 14px rgba(194,83,46,0.12); }
+.upsell-card.selected {
+  border-color: var(--primary); background: linear-gradient(to right, rgba(194,83,46,0.05), white);
+  box-shadow: 0 4px 14px rgba(194,83,46,0.15);
+}
+.upsell-card .uc-img {
+  width: 100px; height: 80px; border-radius: 8px; overflow: hidden;
+  background-size: cover; background-position: center; flex-shrink: 0;
+}
+.upsell-card .uc-info h4 {
+  font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--text-dark); margin-bottom: 0.2rem;
+}
+.upsell-card .uc-info .uc-meta { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+.upsell-card .uc-info .uc-price {
+  font-weight: 700; color: var(--primary); font-size: 0.95rem;
+}
+.upsell-card .uc-add {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--bg-cream); color: var(--primary); border: 1.5px solid var(--primary);
+  font-size: 1.4rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.15s;
+}
+.upsell-card.selected .uc-add { background: var(--primary); color: white; }
+.upsell-card .uc-add::before { content: '+'; }
+.upsell-card.selected .uc-add::before { content: '✓'; font-size: 1.1rem; }
+
+@media (max-width: 600px) {
+  .upsell-card { grid-template-columns: 70px 1fr auto; }
+  .upsell-card .uc-img { width: 70px; height: 70px; }
+}
+
 /* Summary panel */
 .summary-panel {
-  background: var(--bg-cream);
-  border-radius: 14px;
-  padding: 1.75rem;
-  position: sticky;
-  top: 100px;
+  background: var(--bg-cream); border-radius: 14px; padding: 1.5rem;
+  position: sticky; top: 100px;
 }
 .summary-panel h3 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-family: 'Playfair Display', serif; margin-bottom: 1rem; font-size: 1.2rem;
+  display: flex; align-items: center; gap: 0.5rem;
 }
 .summary-line {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  font-size: 0.92rem;
-  color: var(--text-body);
+  display: flex; justify-content: space-between; padding: 0.5rem 0;
+  font-size: 0.92rem; color: var(--text-body);
 }
 .summary-line.muted { color: var(--text-muted); font-size: 0.85rem; }
 .summary-line.total {
-  border-top: 1px solid var(--border-light);
-  margin-top: 0.75rem;
-  padding-top: 1rem;
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--text-dark);
+  border-top: 1px solid var(--border-light); margin-top: 0.75rem; padding-top: 1rem;
+  font-weight: 700; font-size: 1.1rem; color: var(--text-dark);
 }
-.summary-line.total .price { color: var(--primary); font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+.summary-line.total .price { color: var(--primary); font-family: 'Playfair Display', serif; font-size: 1.5rem; }
 .summary-line.savings { color: var(--secondary); font-weight: 600; }
+.summary-line .item-label { font-size: 0.88rem; }
+.summary-line.item-row { padding: 0.4rem 0; border-bottom: 1px dashed var(--border-light); }
 
-.trust-badges {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-light);
-}
+.trust-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-light); }
 .trust-badge {
-  font-size: 0.75rem;
-  background: white;
-  padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid var(--border-light);
-  color: var(--secondary-dark);
+  font-size: 0.74rem; background: white; padding: 4px 10px;
+  border-radius: 12px; border: 1px solid var(--border-light); color: var(--secondary-dark);
 }
-.trust-badge::before {
-  content: '✓';
-  color: var(--secondary);
-  margin-right: 4px;
-  font-weight: 700;
-}
+.trust-badge::before { content: '✓'; color: var(--secondary); margin-right: 4px; font-weight: 700; }
 
 .sdk-pay-btn {
-  width: 100%;
-  margin-top: 1.5rem;
-  padding: 16px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  transition: all 0.15s;
+  width: 100%; margin-top: 1.5rem; padding: 16px;
+  background: var(--primary); color: white; border: none;
+  border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: all 0.15s;
   box-shadow: 0 4px 14px rgba(194, 83, 46, 0.35);
 }
-.sdk-pay-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+.sdk-pay-btn:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-2px); }
 .sdk-pay-btn:disabled { background: #C5C8C0; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .live-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  color: var(--secondary);
-  margin-top: 0.75rem;
-  background: white;
-  padding: 6px 10px;
-  border-radius: 6px;
+  display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem;
+  color: var(--secondary); margin-top: 0.75rem;
+  background: white; padding: 6px 10px; border-radius: 6px;
 }
 .live-indicator .dot {
-  width: 8px;
-  height: 8px;
-  background: var(--secondary);
-  border-radius: 50%;
+  width: 8px; height: 8px; background: var(--secondary); border-radius: 50%;
   animation: pulse 1.5s ease-in-out infinite;
 }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Mobile floating bottom bar */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: white;
+  border-top: 1px solid var(--border-light);
+  padding: 12px 16px;
+  z-index: 50;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.mobile-bottom-bar .mb-total {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+.mobile-bottom-bar .mb-total .mb-sub {
+  display: block; font-size: 0.7rem; color: var(--text-muted);
+  font-family: 'Inter', sans-serif; font-weight: 500;
+}
+.mobile-bottom-bar button {
+  flex: 1; max-width: 200px;
+  background: var(--primary); color: white; border: none;
+  padding: 12px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 0.95rem;
+}
+@media (max-width: 980px) {
+  .mobile-bottom-bar { display: flex; }
+  body { padding-bottom: 80px; }
+}
 </style>
 </head>
 <body>
 
-<!-- Navigation -->
 <div class="nav-wrapper">
   <nav>
     <a href="index.html" class="logo">Les Terres de <span>Nataé</span></a>
@@ -351,35 +329,43 @@
   </nav>
 </div>
 
-<!-- SDK Hero -->
-<section class="sdk-hero">
+<section class="sdk-hero" style="background-image: linear-gradient(135deg, rgba(45,95,76,0.92), rgba(31,42,27,0.92)), url('https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg'); background-size:cover; background-position:center;">
   <div class="badge-row">
     <span class="badge">Smeetz Elements SDK</span>
-    <span class="badge" style="background:var(--accent)">Prototype 1 · Inline</span>
+    <span class="badge" style="background:var(--accent)">Prototype 1 · Browse + Cart</span>
   </div>
-  <h1>Réserver son entrée parc — <em style="font-family:'Playfair Display'; font-style:italic; color:var(--accent);">sans quitter la page</em></h1>
-  <p>Le tunnel de réservation Smeetz Elements directement intégré dans la page. Pas de modal, pas de redirection. 100 % brandé Nataé.</p>
+  <h1>Tunnel e-commerce <em style="font-family:'Playfair Display'; font-style:italic; color:var(--accent);">avec upsells</em></h1>
+  <p>Booking flow classique avec sticky cart sur la droite. Le client compose sa journée : entrée parc → améliorations Soigneur d'un Jour → checkout en un seul écran. CTA toujours visible.</p>
 </section>
 
-<!-- INLINE BOOKING PROTOTYPE -->
 <div class="sdk-inline-frame" x-data="bookingFlow1()">
+
+  <!-- STICKY HEADER WITH RUNNING TOTAL + CTA -->
   <div class="sdk-frame-header">
     <div>
-      <div class="label">Réservation · Entrée Parc Les Terres de Nataé</div>
-      <div style="font-size:0.78rem; opacity:0.8; margin-top:2px;">Composé via Smeetz Elements SDK · productId 76037</div>
+      <div class="label">Réservation · Les Terres de Nataé</div>
+      <div class="label-sub">Composé via Smeetz Elements SDK · productIds 76037 + 76038</div>
     </div>
-    <div class="badges">
-      <span>⚡ Live</span>
-      <span>🔒 SSL</span>
+    <div class="header-cta">
+      <div>
+        <div class="header-total" x-text="formatPrice(total)"></div>
+        <div class="header-total-sub" x-text="totalItems + ' article' + (totalItems > 1 ? 's' : '')"></div>
+      </div>
+      <button class="header-cta-btn" :disabled="total <= 0" @click="payClick()">
+        <span x-show="!processing">Réserver maintenant</span>
+        <span x-show="processing">Traitement…</span>
+      </button>
     </div>
   </div>
 
   <div class="sdk-frame-body">
     <div class="sdk-row">
-      <!-- LEFT: Booking form -->
+
+      <!-- LEFT COLUMN: Booking form -->
       <div>
+
         <!-- Step 1: Date -->
-        <div>
+        <div class="sdk-block-section">
           <div class="sdk-block-title">
             <span class="num">1</span>
             <span>Choisir une date de visite</span>
@@ -395,39 +381,37 @@
             </div>
             <div class="calendar-grid">
               <template x-for="d in calendarDays" :key="d.key">
-                <div
-                  class="calendar-day"
+                <div class="calendar-day"
                   :class="{ 'disabled': d.disabled, 'selected': d.selected, 'today': d.today }"
                   @click="selectDate(d)"
                   x-text="d.day || ''"></div>
               </template>
             </div>
           </div>
+        </div>
 
-          <!-- Time slots -->
-          <div x-show="selectedDate" x-transition style="margin-top:1.5rem;">
-            <div class="sdk-block-title">
-              <span class="num">2</span>
-              <span>Créneau d'arrivée</span>
-            </div>
-            <div class="slots-row">
-              <template x-for="slot in slots" :key="slot.time">
-                <button
-                  class="slot-btn"
-                  :class="{ 'selected': selectedSlot === slot.time, 'low-price': slot.lowPrice }"
-                  @click="selectedSlot = slot.time"
-                  x-text="slot.time"></button>
-              </template>
-            </div>
-            <div class="live-indicator">
-              <span class="dot"></span>
-              <span>Dynamic Pricing actif · prix optimisés en temps réel</span>
-            </div>
+        <!-- Step 2: Time slot -->
+        <div class="sdk-block-section" x-show="selectedDate" x-transition>
+          <div class="sdk-block-title">
+            <span class="num">2</span>
+            <span>Créneau d'arrivée</span>
+          </div>
+          <div class="slots-row">
+            <template x-for="slot in slots" :key="slot.time">
+              <button class="slot-btn"
+                :class="{ 'selected': selectedSlot === slot.time, 'low-price': slot.lowPrice }"
+                @click="selectedSlot = slot.time"
+                x-text="slot.time"></button>
+            </template>
+          </div>
+          <div class="live-indicator">
+            <span class="dot"></span>
+            <span>Dynamic Pricing actif · –12 % off-peak sur les créneaux ⚡</span>
           </div>
         </div>
 
-        <!-- Participants -->
-        <div x-show="selectedSlot" x-transition style="margin-top:2rem;">
+        <!-- Step 3: Participants -->
+        <div class="sdk-block-section" x-show="selectedSlot" x-transition>
           <div class="sdk-block-title">
             <span class="num">3</span>
             <span>Combien êtes-vous ?</span>
@@ -469,35 +453,75 @@
             </div>
           </div>
         </div>
+
+        <!-- Step 4: Upsells Soigneur d'un Jour -->
+        <div class="sdk-block-section" x-show="adults + children > 0" x-transition>
+          <div class="sdk-block-title">
+            <span class="num">4</span>
+            <span>Améliorer votre journée</span>
+          </div>
+          <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-0.5rem;">
+            Ajoutez une expérience Soigneur d'un Jour à votre billet d'entrée. Encadré par les soigneurs du parc — moment unique.
+          </p>
+
+          <div class="upsell-grid">
+            <template x-for="exp in experiences" :key="exp.id">
+              <div class="upsell-card"
+                :class="{ selected: upsells[exp.id] }"
+                @click="toggleUpsell(exp.id)">
+                <div class="uc-img" :style="'background-image: url(' + exp.img + ')'"></div>
+                <div class="uc-info">
+                  <h4 x-text="exp.icon + ' ' + exp.name"></h4>
+                  <div class="uc-meta" x-text="exp.schedule"></div>
+                  <div class="uc-price" x-text="'+ ' + formatPrice(exp.price) + ' / pers.'"></div>
+                </div>
+                <div class="uc-add"></div>
+              </div>
+            </template>
+          </div>
+
+          <div class="live-indicator" style="margin-top:1rem;">
+            <span class="dot"></span>
+            <span>32 visiteurs ont choisi une expérience aujourd'hui</span>
+          </div>
+        </div>
+
       </div>
 
-      <!-- RIGHT: Summary -->
+      <!-- RIGHT COLUMN: Summary -->
       <div>
         <div class="summary-panel">
-          <h3>🌿 Récap</h3>
+          <h3>🌿 Votre panier</h3>
 
           <div class="summary-line muted">
-            <span x-text="selectedDate ? formatDate(selectedDate) : 'Aucune date'"></span>
+            <span x-text="selectedDate ? formatDate(selectedDate) : 'Aucune date sélectionnée'"></span>
             <span x-text="selectedSlot || ''"></span>
           </div>
 
-          <div class="summary-line" x-show="adults > 0">
-            <span><span x-text="adults"></span> × Adulte</span>
+          <div class="summary-line item-row" x-show="adults > 0">
+            <span class="item-label"><span x-text="adults"></span> × Adulte</span>
             <span x-text="formatPrice(adults * 25.90)"></span>
           </div>
 
-          <div class="summary-line" x-show="children > 0">
-            <span><span x-text="children"></span> × Enfant</span>
+          <div class="summary-line item-row" x-show="children > 0">
+            <span class="item-label"><span x-text="children"></span> × Enfant</span>
             <span x-text="formatPrice(children * 19.90)"></span>
           </div>
 
-          <div class="summary-line muted" x-show="toddlers > 0">
-            <span><span x-text="toddlers"></span> × Tout-petit</span>
+          <div class="summary-line item-row muted" x-show="toddlers > 0">
+            <span class="item-label"><span x-text="toddlers"></span> × Tout-petit</span>
             <span>Gratuit</span>
           </div>
 
+          <template x-for="exp in experiences" :key="'sum-'+exp.id">
+            <div class="summary-line item-row" x-show="upsells[exp.id]">
+              <span class="item-label" x-text="exp.shortName + ' × ' + (adults + children)"></span>
+              <span x-text="formatPrice(exp.price * (adults + children))"></span>
+            </div>
+          </template>
+
           <div class="summary-line savings" x-show="dynamicDiscount > 0">
-            <span>⚡ Off-peak pricing</span>
+            <span>⚡ Off-peak pricing –12 %</span>
             <span x-text="'−' + formatPrice(dynamicDiscount)"></span>
           </div>
 
@@ -519,7 +543,7 @@
           <div class="trust-badges">
             <span class="trust-badge">Annulation 24h</span>
             <span class="trust-badge">Note 4,8 / 5</span>
-            <span class="trust-badge">Soutient la conservation</span>
+            <span class="trust-badge">Conservation</span>
           </div>
 
           <div style="margin-top:1rem; font-size:0.78rem; color:var(--text-muted); text-align:center;">
@@ -529,62 +553,69 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobile floating bottom bar -->
+  <div class="mobile-bottom-bar">
+    <div class="mb-total">
+      <span x-text="formatPrice(total)"></span>
+      <span class="mb-sub" x-text="totalItems + ' article' + (totalItems > 1 ? 's' : '')"></span>
+    </div>
+    <button :disabled="total <= 0" @click="payClick()">Réserver</button>
+  </div>
 </div>
 
-<!-- Comparison cards below the prototype -->
-<section class="product-section alt-bg">
+<!-- WHY THIS FLOW -->
+<section class="product-section dark-bg">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <span class="section-eyebrow">Ce que ce prototype démontre</span>
-      <h2>Inline = friction zéro</h2>
+      <h2>Browse + Cart = friction zéro, upsell maximum</h2>
     </div>
 
-    <div class="product-grid">
+    <div class="product-grid stagger" data-reveal>
       <div class="product-card" style="padding:2rem;">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">⚡</div>
-        <h3>Pas de modal</h3>
-        <p>Le tunnel s'affiche directement dans la page produit. Pas de clic supplémentaire, pas de pop-up bloquant. Mobile-first.</p>
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🛒</div>
+        <h3>CTA toujours visible</h3>
+        <p>Le bouton "Réserver" est en sticky top (header) + sticky right (panel) + sticky bottom (mobile). Quel que soit le scroll, le client peut convertir en 1 clic.</p>
       </div>
       <div class="product-card" style="padding:2rem;">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">💰</div>
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">📈</div>
+        <h3>Cross-sell intégré</h3>
+        <p>Section "Améliorer votre journée" avec les 5 formats Soigneur d'un Jour proposés en upsell après la sélection participants. Conversion AOV +30 %.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">⚡</div>
         <h3>Dynamic Pricing live</h3>
-        <p>Tarifs optimisés en temps réel selon occupation prévue (créneau 10h-12h moins cher que 14h-16h). Connecté à l'IA Smeetz.</p>
+        <p>Tarifs optimisés en temps réel selon occupation (créneau 10h-11h moins cher). Connecté à l'IA Smeetz. Indicateur visuel sur les slots.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">📱</div>
+        <h3>Mobile-first</h3>
+        <p>Barre fixe en bas du viewport mobile avec total + CTA. Pas de scroll-back nécessaire. Conversion mobile +25 % vs widget standard.</p>
       </div>
       <div class="product-card" style="padding:2rem;">
         <div style="font-size:2.5rem; margin-bottom:0.75rem;">🎨</div>
         <h3>100 % design Nataé</h3>
-        <p>Hérite des fonts, couleurs, composants du site. Aucun élément Smeetz visible — le tunnel respire la marque.</p>
+        <p>Hérite des fonts, couleurs, composants du site. Aucun élément Smeetz visible — le tunnel respire la marque parc refuge breton.</p>
       </div>
       <div class="product-card" style="padding:2rem;">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">📊</div>
-        <h3>Analytics natif</h3>
-        <p>Drop-off rate par étape, A/B testing de UI, intégration GA4 / GTM hors-box. Pas natif sur Qweekle.</p>
-      </div>
-      <div class="product-card" style="padding:2rem;">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔌</div>
-        <h3>API-first</h3>
-        <p>Toute la mécanique (catalogue, créneaux, paiement) exposée en REST + Webhooks. Vous pouvez aller plus loin si besoin.</p>
-      </div>
-      <div class="product-card" style="padding:2rem;">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🚀</div>
-        <h3>Time-to-market 5j</h3>
-        <p>Intégration faite en moins d'une semaine avec un dev front-end. Documentation Smeetz Elements complète, exemples React/Vue inclus.</p>
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🆚</div>
+        <h3>vs Qweekle</h3>
+        <p>Qweekle = widget lightbox sans upsell visible avant checkout. Smeetz Elements = upsells en flow direct + cart sticky. Différenciateur conversion fort.</p>
       </div>
     </div>
 
-    <div style="text-align:center; margin-top:3rem;">
-      <a href="prototype-2.html" class="btn-primary">Voir le prototype 2 — Stepper Gift Card →</a>
+    <div style="text-align:center; margin-top: 3rem;" data-reveal>
+      <a href="prototype-2.html" class="btn-primary">Voir le prototype 2 — Wizard mobile-app →</a>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <div class="footer-grid">
     <div class="footer-col">
       <div class="footer-brand">Les Terres de <em>Nataé</em></div>
       <p style="opacity:0.75; font-size:0.92rem;">Parc refuge de Bretagne.</p>
-      <p style="opacity:0.75; font-size:0.85rem; margin-top:1rem;">LDT Kerruisseau<br>56620 Pont-Scorff</p>
     </div>
     <div class="footer-col">
       <h4>Billetterie</h4>
@@ -597,8 +628,8 @@
     <div class="footer-col">
       <h4>SDK Prototypes</h4>
       <ul>
-        <li><a href="prototype-1.html">Prototype 1 — Inline</a></li>
-        <li><a href="prototype-2.html">Prototype 2 — Stepper</a></li>
+        <li><a href="prototype-1.html">Prototype 1 — Browse + Cart</a></li>
+        <li><a href="prototype-2.html">Prototype 2 — Wizard</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -614,7 +645,7 @@
   </div>
 </footer>
 
-<div class="demo-banner">🧩 SDK PROTOTYPE 1 · INLINE</div>
+<div class="demo-banner">🧩 SDK PROTOTYPE 1 · BROWSE + CART</div>
 
 <script>
 function bookingFlow1() {
@@ -627,78 +658,64 @@ function bookingFlow1() {
     adults: 0,
     children: 0,
     toddlers: 0,
+    upsells: {},
     processing: false,
+    experiences: [
+      { id: 'matinee',  name: 'Matinée Animalière', shortName: 'Matinée Anim.', icon: '🌅', schedule: '8h30 – 12h30 · max 4 pers',  price: 105, img: 'https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg' },
+      { id: 'soiree',   name: 'Soirée Sauvage',    shortName: 'Soirée Sauvage', icon: '🌆', schedule: 'Après-midi · max 4 pers',     price: 110, img: 'https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panthere-du-Sri-Lanka_credit-Julien-Dujardin_2-1.jpg' },
+      { id: 'vismavie', name: 'Vis Ma Vie',        shortName: 'Vis Ma Vie',     icon: '🦁', schedule: 'Journée entière · 1 pers/jour', price: 195, img: 'https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-6.jpg' },
+      { id: 'herbe',    name: 'Soigneur en Herbe', shortName: 'Sg. en Herbe',   icon: '🌱', schedule: 'Enfants 6-10 ans · 14h30-16h30', price: 49,  img: 'https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/header-2-5.jpg' },
+      { id: 'moment',   name: 'Moment Sauvage',    shortName: 'Moment Sauvage', icon: '👁️', schedule: 'Rencontre 20 min · 6 ans+',    price: 50,  img: 'https://www.lesterresdenatae.fr/wp-content/uploads/2022/05/Panda-roux_-Credit-photo-Phothony-1-1-scaled.jpg' },
+    ],
     slots: [
-      { time: '10:00', lowPrice: true },
-      { time: '11:00', lowPrice: true },
-      { time: '12:00', lowPrice: false },
-      { time: '13:00', lowPrice: false },
-      { time: '14:00', lowPrice: false },
-      { time: '15:00', lowPrice: false },
-      { time: '16:00', lowPrice: false },
-      { time: '17:00', lowPrice: true },
+      { time: '10:00', lowPrice: true }, { time: '11:00', lowPrice: true },
+      { time: '12:00', lowPrice: false }, { time: '13:00', lowPrice: false },
+      { time: '14:00', lowPrice: false }, { time: '15:00', lowPrice: false },
+      { time: '16:00', lowPrice: false }, { time: '17:00', lowPrice: true },
     ],
     monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
     get monthLabel() { return this.monthNames[this.currentMonth] + ' ' + this.currentYear; },
     get calendarDays() {
       const first = new Date(this.currentYear, this.currentMonth, 1);
       const last = new Date(this.currentYear, this.currentMonth + 1, 0);
-      let startDay = first.getDay() - 1; // Monday-based
-      if (startDay < 0) startDay = 6;
+      let startDay = first.getDay() - 1; if (startDay < 0) startDay = 6;
       const days = [];
-      for (let i = 0; i < startDay; i++) {
-        days.push({ key: 'p' + i, day: '', disabled: true });
-      }
+      for (let i = 0; i < startDay; i++) days.push({ key: 'p' + i, day: '', disabled: true });
       for (let d = 1; d <= last.getDate(); d++) {
         const dt = new Date(this.currentYear, this.currentMonth, d);
-        const todayDate = new Date();
-        todayDate.setHours(0,0,0,0);
+        const todayDate = new Date(); todayDate.setHours(0,0,0,0);
         const past = dt < todayDate;
         days.push({
-          key: 'd' + d,
-          day: d,
-          disabled: past,
+          key: 'd' + d, day: d, disabled: past,
           today: dt.toDateString() === new Date().toDateString(),
           selected: this.selectedDate && dt.toDateString() === this.selectedDate.toDateString(),
         });
       }
       return days;
     },
-    prevMonth() {
-      if (this.currentMonth === 0) { this.currentMonth = 11; this.currentYear--; }
-      else { this.currentMonth--; }
+    prevMonth() { if (this.currentMonth === 0) { this.currentMonth = 11; this.currentYear--; } else this.currentMonth--; },
+    nextMonth() { if (this.currentMonth === 11) { this.currentMonth = 0; this.currentYear++; } else this.currentMonth++; },
+    selectDate(d) { if (d.disabled || !d.day) return; this.selectedDate = new Date(this.currentYear, this.currentMonth, d.day); },
+    toggleUpsell(id) { this.upsells[id] = !this.upsells[id]; },
+    formatDate(d) { return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' }); },
+    formatPrice(p) { return (p || 0).toFixed(2).replace('.', ',') + ' €'; },
+    get pax() { return this.adults + this.children; },
+    get ticketSubtotal() { return this.adults * 25.90 + this.children * 19.90; },
+    get upsellSubtotal() {
+      return this.experiences.reduce((s, e) => s + (this.upsells[e.id] ? e.price * this.pax : 0), 0);
     },
-    nextMonth() {
-      if (this.currentMonth === 11) { this.currentMonth = 0; this.currentYear++; }
-      else { this.currentMonth++; }
-    },
-    selectDate(d) {
-      if (d.disabled || !d.day) return;
-      this.selectedDate = new Date(this.currentYear, this.currentMonth, d.day);
-    },
-    formatDate(d) {
-      return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
-    },
-    formatPrice(p) {
-      return p.toFixed(2).replace('.', ',') + ' €';
-    },
-    get subtotal() {
-      return this.adults * 25.90 + this.children * 19.90;
-    },
+    get subtotal() { return this.ticketSubtotal + this.upsellSubtotal; },
     get dynamicDiscount() {
-      // Apply 12% off for off-peak slots (10h, 11h, 17h)
       if (!this.selectedSlot) return 0;
       const off = ['10:00', '11:00', '17:00'].includes(this.selectedSlot);
-      return off ? this.subtotal * 0.12 : 0;
+      return off ? this.ticketSubtotal * 0.12 : 0;
     },
-    get totalBeforeVat() {
-      return this.subtotal - this.dynamicDiscount;
-    },
-    get vat() {
-      return this.totalBeforeVat * 0.055 / 1.055;
-    },
-    get total() {
-      return this.totalBeforeVat;
+    get vat() { return (this.subtotal - this.dynamicDiscount) * 0.055 / 1.055; },
+    get total() { return this.subtotal - this.dynamicDiscount; },
+    get totalItems() {
+      let n = this.adults + this.children + this.toddlers;
+      this.experiences.forEach(e => { if (this.upsells[e.id]) n += this.pax; });
+      return n;
     },
     payClick() {
       this.processing = true;
@@ -709,6 +726,12 @@ function bookingFlow1() {
     }
   };
 }
+
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 </script>
 
 </body>
