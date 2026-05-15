@@ -863,5 +863,23 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 </script>
 
+<!-- Chatbot Atlas Nataé -->
+<script>
+  !(function(a, t, o, n, l, y, w, g) {
+    a.__atlas__ ||
+    (((w = a.__atlas__ = function() {
+      w._api ? w._api.apply(w, arguments) : w.queue.push(arguments);
+    }).queue = []),((y = t.createElement(o)).async = !0),
+    (w.wId = "6a07373a1e10aaf382887b14", w.e = ""),
+    (g = new XMLHttpRequest()).open("GET", n + "version?v=" + Date.now(), !0),
+    (g.onreadystatechange = function() {
+      4 === g.readyState &&
+        ((y.src = n + "atlas-widget.min.js?v=" + (200 === g.status ? g.responseText : Date.now())),
+        (l = t.getElementsByTagName(o)[0]).parentNode.insertBefore(y, l));
+    }),
+    g.send());
+  })(window, document, "script", "https://cw.smeetz.com/");
+</script>
+
 </body>
 </html>
