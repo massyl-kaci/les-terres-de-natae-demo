@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Demo site — internal use only — Les Terres de Nataé">
+<title>Les Terres de Nataé — Parc Refuge de Bretagne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+
+<!-- Smeetz loader -->
+<script>
+!function(e, t, n, i, p, r, s) {
+  e[n] || ((p = e[n] = function() {
+    p.p ? p.p.apply(p, arguments) : p.q.push(arguments);
+  }).q = [], p.t = 1 * new Date(), p.g = "19923", (r = t.createElement("script")).async = 1,
+  r.src = "https://tracker.smeetz.com/smeetz-main-widget.js", (s = t.getElementsByTagName("script")[0]).parentNode.insertBefore(r, s));
+}(window, document, "_smtz");
+</script>
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="nav-wrapper">
+  <nav>
+    <a href="index.html" class="logo">Les Terres de <span>Nataé</span></a>
+    <ul class="nav-links">
+      <li><a href="#billetterie">Billetterie</a></li>
+      <li><a href="#experiences">Expériences</a></li>
+      <li><a href="#pass-annuel">Pass Annuel</a></li>
+      <li><a href="#cse">Entreprises</a></li>
+      <li><a href="bon-cadeau.html">Bon Cadeau</a></li>
+      <li><a href="prototype-1.html" class="sdk-badge">SDK Demo 1</a></li>
+      <li><a href="prototype-2.html" class="sdk-badge">SDK Demo 2</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tagline">Parc refuge de Bretagne · Pont-Scorff</span>
+    <h1>Le sanctuaire des <em>espèces menacées</em>.</h1>
+    <p class="lead">14 hectares de forêt bretonne, 120 espèces dont 60 % menacées d'extinction. Pandas roux, éléphants, fauves, capybaras — Nataé, déesse celte de la nature, veille sur le vivant.</p>
+    <div class="hero-cta-group">
+      <!-- 🎟️ SMEETZ: Entrée Parc Nataé (wid 5351) -->
+      <a href="#" class="btn-primary"
+         onclick="event.preventDefault(); _smtz('openwidget', 1 * new Date(), {
+           productId: '76037', lightbox: true, listView: false,
+           gId: '19923', wId: '5351',
+           codes: 'RDAMHEPF', cats: '155224',
+           linkText: 'en: ,,, fr: ,,, de: ,,, it: ',
+           linkUrl: 'en: ,,, fr: ,,, de: ,,, it: ',
+         });">Réserver ma visite</a>
+      <a href="#experiences" class="btn-ghost">Découvrir les expériences</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<section class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="number">120</span>
+      <span class="label">espèces hébergées</span>
+    </div>
+    <div class="stat-item">
+      <span class="number">60 %</span>
+      <span class="label">espèces menacées</span>
+    </div>
+    <div class="stat-item">
+      <span class="number">14 ha</span>
+      <span class="label">de forêt-refuge</span>
+    </div>
+    <div class="stat-item">
+      <span class="number">285k</span>
+      <span class="label">visiteurs par an</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Billetterie ====== -->
+<section id="billetterie" class="product-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Billetterie</span>
+      <h2>Une journée au cœur du parc refuge</h2>
+      <p>Cinq heures de visite en moyenne, soigneurs présents sur le terrain, animations tout au long de la journée. Une entrée Nataé soutient directement la conservation des espèces les plus menacées.</p>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img class="card-image" src="https://source.unsplash.com/600x400/?red-panda,forest" alt="Pandas roux">
+        <div class="card-body">
+          <span class="card-tag">Visite parc</span>
+          <h3>Adulte +12 ans</h3>
+          <p>Accès illimité au parc sur la journée, animations soigneurs incluses, ouvert tous les jours dont jours fériés.</p>
+          <div class="price-line">À partir de <strong>25,90 €</strong> · TVA 5,5 %</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="card-image" src="https://source.unsplash.com/600x400/?elephant,family" alt="Famille au parc">
+        <div class="card-body">
+          <span class="card-tag">Tarif enfant</span>
+          <h3>Enfant 3-11 ans</h3>
+          <p>Tarif réduit pour les jeunes visiteurs. Gratuit pour les moins de 3 ans sur présentation du livret de famille.</p>
+          <div class="price-line">À partir de <strong>19,90 €</strong> · TVA 5,5 %</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="card-image" src="https://source.unsplash.com/600x400/?leopard,nature" alt="Panthère du Sri Lanka">
+        <div class="card-body">
+          <span class="card-tag">Tarifs réduits</span>
+          <h3>Étudiants · Seniors · CMI</h3>
+          <p>–10 % sur le billet d'entrée pour les étudiants, +70 ans, détenteurs CMI, familles nombreuses et Handipass. Sur présentation au guichet du parc.</p>
+          <div class="price-line">À demander à la <strong>billetterie</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 3rem;">
+      <!-- 🎟️ SMEETZ: Entrée Parc Nataé (wid 5351) -->
+      <a href="#" class="btn-primary"
+         onclick="event.preventDefault(); _smtz('openwidget', 1 * new Date(), {
+           productId: '76037', lightbox: true, listView: false,
+           gId: '19923', wId: '5351',
+           codes: 'RDAMHEPF', cats: '155224',
+           linkText: 'en: ,,, fr: ,,, de: ,,, it: ',
+           linkUrl: 'en: ,,, fr: ,,, de: ,,, it: ',
+         });">Réserver ma visite</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Soigneur d'un Jour ====== -->
+<section id="experiences" class="product-section alt-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Expériences premium</span>
+      <h2>Devenir soigneur le temps d'<em style="font-family:'Playfair Display'; font-style:italic; color:var(--primary);">une journée</em></h2>
+      <p>Cinq formats au choix pour entrer dans le quotidien des soigneurs Nataé. Préparation des repas, observation animale, soins quotidiens — encadré par l'équipe du parc.</p>
+    </div>
+
+    <div class="soigneur-grid">
+      <div class="soigneur-format">
+        <div class="icon">🌅</div>
+        <h4>Matinée Animalière</h4>
+        <div class="schedule">8h30 – 12h30 · 4 pers max</div>
+        <div class="price">dès 105 €</div>
+      </div>
+      <div class="soigneur-format">
+        <div class="icon">🌆</div>
+        <h4>Soirée Sauvage</h4>
+        <div class="schedule">Après-midi · 4 pers max</div>
+        <div class="price">dès 110 €</div>
+      </div>
+      <div class="soigneur-format">
+        <div class="icon">🦁</div>
+        <h4>Vis Ma Vie</h4>
+        <div class="schedule">Journée entière · 1 pers/jour</div>
+        <div class="price">195 €</div>
+      </div>
+      <div class="soigneur-format">
+        <div class="icon">🌱</div>
+        <h4>Soigneur en Herbe</h4>
+        <div class="schedule">6-10 ans · 14h30-16h30</div>
+        <div class="price">49 €</div>
+      </div>
+      <div class="soigneur-format">
+        <div class="icon">👁️</div>
+        <h4>Moment Sauvage</h4>
+        <div class="schedule">Rencontre 20 min · 6 ans+</div>
+        <div class="price">dès 50 €</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <!-- 🎟️ SMEETZ: Soigneur d'un Jour (wid 5352) -->
+      <a href="#" class="btn-primary"
+         onclick="event.preventDefault(); _smtz('openwidget', 1 * new Date(), {
+           productId: '76038', lightbox: true, listView: false,
+           gId: '19923', wId: '5352',
+           codes: '3Y2ZWG6H,VLX2Z4GA,A4PE42N9,AHGLHJK4,9F8LK2HX',
+           cats: '155225,155226,155227,155228,155229',
+           linkText: 'en: ,,, fr: ,,, de: ,,, it: ',
+           linkUrl: 'en: ,,, fr: ,,, de: ,,, it: ',
+         });">Devenir soigneur d'un jour</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Pass Annuel ====== -->
+<section id="pass-annuel" class="product-section">
+  <div class="section-inner">
+    <div class="featured-product">
+      <img src="https://source.unsplash.com/800x1000/?family,zoo,nature" alt="Pass Annuel Nataé">
+      <div class="featured-content">
+        <span class="section-eyebrow">Membre Nataé</span>
+        <h3>Pass Annuel — 12 mois d'accès illimité</h3>
+        <p>Pour celles et ceux qui reviennent au fil des saisons. Le Pass Annuel Nataé donne accès au parc sans limite, avec entrée anticipée 15 minutes avant la fermeture et –10 % sur la boutique et les expériences Soigneur d'un Jour.</p>
+        <ul class="bullet-list">
+          <li>Accès illimité 12 mois</li>
+          <li>Entrée anticipée 15 min avant fermeture</li>
+          <li>–10 % boutique + Soigneur d'un Jour</li>
+          <li>Tarif Handipass disponible pour détenteurs CMI</li>
+        </ul>
+        <div class="price-line"><strong>64 €</strong> adulte · <strong>54 €</strong> enfant 3-11 ans</div>
+        <!-- 🎟️ SMEETZ: Pass Annuel Nataé (wid 5353) -->
+        <a href="#" class="btn-primary"
+           onclick="event.preventDefault(); _smtz('openwidget', 1 * new Date(), {
+             productId: '76039', lightbox: true, listView: false,
+             gId: '19923', wId: '5353',
+             codes: 'YA49JAEK', cats: '155261',
+             linkText: 'en: ,,, fr: ,,, de: ,,, it: ',
+             linkUrl: 'en: ,,, fr: ,,, de: ,,, it: ',
+           });">Souscrire le Pass Annuel</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Bon Cadeau teaser ====== -->
+<section class="cta-band">
+  <h2>Offrir Nataé</h2>
+  <p>Quatre visuels au choix — panda roux, panthère du Sri Lanka, ara hyacinthe, éléphant. Bon cadeau valable 12 mois sur l'entrée parc ou les expériences Soigneur d'un Jour.</p>
+  <a href="bon-cadeau.html" class="btn-ghost" style="border-color:white;color:white;">Voir les bons cadeaux</a>
+</section>
+
+<!-- ====== CSE / Entreprises ====== -->
+<section id="cse" class="product-section alt-bg">
+  <div class="section-inner">
+    <div class="featured-product reverse">
+      <img src="https://source.unsplash.com/800x1000/?team,corporate,nature" alt="CSE Nataé">
+      <div class="featured-content">
+        <span class="section-eyebrow">CSE · COS · COE · Amicale</span>
+        <h3>E-Pass Nataé pour votre comité d'entreprise</h3>
+        <p>Offrez à vos salariés un accès au parc refuge breton à tarif négocié, sans contrainte de date. Le salarié reçoit son e-billet par e-mail, valable 12 mois, utilisable n'importe quel jour d'ouverture.</p>
+        <ul class="bullet-list">
+          <li>E-pass sans date — flexibilité totale</li>
+          <li>Compatible Edenred, Reduc CE, E-Miles, CEZAM</li>
+          <li>Microsite CSE branded sur demande</li>
+          <li>Commission par partenaire négociable</li>
+        </ul>
+        <div class="price-line">Tarif <strong>négocié</strong> selon volume — contact billetterie@lesterresdenatae.fr</div>
+        <!-- 🎟️ SMEETZ: CSE Nataé (wid 5354) -->
+        <a href="#" class="btn-primary"
+           onclick="event.preventDefault(); _smtz('openwidget', 1 * new Date(), {
+             productId: '76040', lightbox: true, listView: false,
+             gId: '19923', wId: '5354',
+             codes: 'FSJ4AHY6,2HJ75AAE', cats: '155262,155263',
+             linkText: 'en: ,,, fr: ,,, de: ,,, it: ',
+             linkUrl: 'en: ,,, fr: ,,, de: ,,, it: ',
+           });">Acheter mon E-Pass CSE</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SDK Prototypes teaser ====== -->
+<section class="product-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Au-delà du widget</span>
+      <h2>Deux flux de réservation <em style="font-family:'Playfair Display'; font-style:italic; color:var(--primary);">construits sur mesure</em></h2>
+      <p>Smeetz Elements (SDK) permet d'aller plus loin que les widgets standard — composer un tunnel de réservation 100 % intégré à votre site, avec votre design system. Découvrez deux prototypes brandés Nataé.</p>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card" style="text-align:center;">
+        <div style="height:180px; background: linear-gradient(135deg, var(--secondary), var(--secondary-dark)); display:flex; align-items:center; justify-content:center; color:white; font-family:'Playfair Display'; font-size:2rem; font-style:italic;">SDK Demo 1</div>
+        <div class="card-body">
+          <span class="card-tag">Smeetz Elements</span>
+          <h3>Flux inline immersif</h3>
+          <p>Tunnel de réservation directement embarqué dans la page, sans lightbox. Idéal pour l'entrée parc.</p>
+          <a href="prototype-1.html" class="btn-primary btn-block">Voir le prototype 1</a>
+        </div>
+      </div>
+      <div class="product-card" style="text-align:center;">
+        <div style="height:180px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display:flex; align-items:center; justify-content:center; color:white; font-family:'Playfair Display'; font-size:2rem; font-style:italic;">SDK Demo 2</div>
+        <div class="card-body">
+          <span class="card-tag">Smeetz Elements</span>
+          <h3>Flux multi-étapes guidé</h3>
+          <p>Booking flow avancé en plusieurs étapes pour les expériences Soigneur d'un Jour ou les bons cadeaux.</p>
+          <a href="prototype-2.html" class="btn-primary btn-block">Voir le prototype 2</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Footer ====== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">Les Terres de <em>Nataé</em></div>
+      <p style="opacity:0.75; font-size:0.92rem;">Parc refuge de Bretagne dédié aux espèces les plus menacées. Nataé, déesse celte de la nature, du renouveau et de la protection.</p>
+      <p style="opacity:0.75; font-size:0.85rem; margin-top:1rem;">LDT Kerruisseau<br>56620 Pont-Scorff<br>02 97 59 54 33</p>
+    </div>
+    <div class="footer-col">
+      <h4>Billetterie</h4>
+      <ul>
+        <li><a href="#billetterie">Visite du parc</a></li>
+        <li><a href="#pass-annuel">Pass Annuel</a></li>
+        <li><a href="bon-cadeau.html">Bon Cadeau</a></li>
+        <li><a href="#cse">E-Pass CSE</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Expériences</h4>
+      <ul>
+        <li><a href="#experiences">Matinée Animalière</a></li>
+        <li><a href="#experiences">Soirée Sauvage</a></li>
+        <li><a href="#experiences">Vis Ma Vie</a></li>
+        <li><a href="#experiences">Moment Sauvage</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Horaires</h4>
+      <ul>
+        <li>Printemps · 10h-18h</li>
+        <li>Été · 10h-19h</li>
+        <li>Automne · 10h-18h</li>
+        <li>Hiver · 10h-17h</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Les Terres de Nataé · Demo Smeetz internal use only</span>
+    <span>Site démo · ne pas indexer</span>
+  </div>
+</footer>
+
+<div class="demo-banner">🎬 DEMO SMEETZ</div>
+
+</body>
+</html>

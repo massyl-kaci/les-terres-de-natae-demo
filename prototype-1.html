@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Demo site — SDK Prototype 1 — internal use only">
+<title>SDK Demo 1 — Inline Booking · Les Terres de Nataé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="nav-wrapper">
+  <nav>
+    <a href="index.html" class="logo">Les Terres de <span>Nataé</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#billetterie">Billetterie</a></li>
+      <li><a href="index.html#experiences">Expériences</a></li>
+      <li><a href="index.html#pass-annuel">Pass Annuel</a></li>
+      <li><a href="index.html#cse">Entreprises</a></li>
+      <li><a href="bon-cadeau.html">Bon Cadeau</a></li>
+      <li><a href="prototype-1.html" class="sdk-badge" style="background:var(--accent); color:var(--text-dark)">SDK Demo 1</a></li>
+      <li><a href="prototype-2.html" class="sdk-badge">SDK Demo 2</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- SDK Hero -->
+<section class="sdk-hero">
+  <div class="badge-row">
+    <span class="badge">Smeetz Elements</span>
+    <span class="badge">SDK Prototype</span>
+  </div>
+  <h1>Flux de réservation <em style="font-family:'Playfair Display'; font-style:italic; color:var(--accent);">inline immersif</em></h1>
+  <p>Plus de lightbox — le tunnel de réservation s'intègre directement dans la page produit. 100 % brandé, 100 % à votre design system. Idéal pour la billetterie principale du parc.</p>
+</section>
+
+<!-- Prototype placeholder -->
+<div class="sdk-prototype-placeholder">
+  <div class="icon-big">🧩</div>
+  <h3>Prototype 1 — Inline Booking Flow</h3>
+  <p>Cet emplacement accueillera le composant Smeetz Elements généré via le skill <code style="display:inline-block; padding:2px 8px; background:var(--bg-cream); border-radius:4px;">smeetz-elements-booking-flow-creation</code>. Le tunnel complet (sélection date · participants · paiement) s'affiche directement ici, sans modal.</p>
+
+  <code>
+    &lt;!-- Smeetz Elements SDK embed point --&gt;<br>
+    &lt;div id="smeetz-booking-inline"&gt;&lt;/div&gt;<br>
+    &lt;script src="https://elements.smeetz.com/sdk.js"&gt;&lt;/script&gt;<br>
+    &lt;script&gt;<br>
+    &nbsp;&nbsp;SmeetzElements.mount('#smeetz-booking-inline', {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;productId: '76037', // Entrée Parc<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;mode: 'inline',<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;theme: 'natae-light'<br>
+    &nbsp;&nbsp;});<br>
+    &lt;/script&gt;
+  </code>
+
+  <div style="margin-top:2rem; padding:1.5rem; background:var(--secondary); color:white; border-radius:8px;">
+    <strong style="display:block; margin-bottom:0.5rem; font-family:'Playfair Display';">🎯 Pourquoi montrer ce flux à Nataé</strong>
+    <p style="margin:0; opacity:0.95; font-size:0.95rem;">Démontre que Smeetz peut aller au-delà du widget standard : composition 100 % custom, intégration native dans le site existant, expérience utilisateur sans rupture. Différenciateur fort vs Qweekle (widget-only).</p>
+  </div>
+</div>
+
+<!-- Use case explainer -->
+<section class="product-section alt-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Cas d'usage</span>
+      <h2>Pour quelle situation ce flux ?</h2>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">⚡</div>
+        <h3>Conversion maximale</h3>
+        <p>Pas de clic supplémentaire pour ouvrir un modal — l'utilisateur voit le tunnel dès l'arrivée sur la page. Réduit le drop-off entre intention et achat.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🎨</div>
+        <h3>Design 100 % cohérent</h3>
+        <p>Hérite des fonts, couleurs et composants de votre design system. Le tunnel respire le même air que le reste du site.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">📱</div>
+        <h3>Mobile-first</h3>
+        <p>Composants Smeetz Elements optimisés mobile (60 % du trafic Nataé). Pas de modal qui prend tout l'écran sur smartphone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="product-section">
+  <div class="section-inner">
+    <div class="section-header" style="align-items:center; text-align:center;">
+      <span class="section-eyebrow">Widget vs SDK</span>
+      <h2>Quand choisir l'un ou l'autre</h2>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%; max-width:900px; margin:0 auto; border-collapse:collapse; background:white; border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-soft);">
+        <thead>
+          <tr style="background:var(--secondary); color:white;">
+            <th style="padding:1rem; text-align:left;">Critère</th>
+            <th style="padding:1rem; text-align:center;">Widget</th>
+            <th style="padding:1rem; text-align:center;">SDK Elements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border-light);">
+            <td style="padding:1rem;"><strong>Temps de mise en place</strong></td>
+            <td style="padding:1rem; text-align:center;">⚡ Quelques minutes</td>
+            <td style="padding:1rem; text-align:center;">🛠️ Quelques jours</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-light); background:var(--bg-cream);">
+            <td style="padding:1rem;"><strong>Personnalisation visuelle</strong></td>
+            <td style="padding:1rem; text-align:center;">Limitée aux couleurs</td>
+            <td style="padding:1rem; text-align:center;">✨ Totale</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-light);">
+            <td style="padding:1rem;"><strong>Intégration site existant</strong></td>
+            <td style="padding:1rem; text-align:center;">Modal/lightbox</td>
+            <td style="padding:1rem; text-align:center;">Inline natif</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-light); background:var(--bg-cream);">
+            <td style="padding:1rem;"><strong>Mise à jour produits</strong></td>
+            <td style="padding:1rem; text-align:center;">Auto (back-office)</td>
+            <td style="padding:1rem; text-align:center;">Auto (back-office)</td>
+          </tr>
+          <tr>
+            <td style="padding:1rem;"><strong>Idéal pour</strong></td>
+            <td style="padding:1rem; text-align:center;">Lancement rapide</td>
+            <td style="padding:1rem; text-align:center;">Site premium / haute conversion</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="prototype-2.html" class="btn-primary">Voir le prototype 2 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">Les Terres de <em>Nataé</em></div>
+      <p style="opacity:0.75; font-size:0.92rem;">Parc refuge de Bretagne.</p>
+      <p style="opacity:0.75; font-size:0.85rem; margin-top:1rem;">LDT Kerruisseau<br>56620 Pont-Scorff</p>
+    </div>
+    <div class="footer-col">
+      <h4>Billetterie</h4>
+      <ul>
+        <li><a href="index.html#billetterie">Visite du parc</a></li>
+        <li><a href="index.html#pass-annuel">Pass Annuel</a></li>
+        <li><a href="bon-cadeau.html">Bon Cadeau</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>SDK Prototypes</h4>
+      <ul>
+        <li><a href="prototype-1.html">Prototype 1 — Inline</a></li>
+        <li><a href="prototype-2.html">Prototype 2 — Multi-étapes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Demo</h4>
+      <ul>
+        <li>18 mai 2026</li>
+        <li>WOW face à Qweekle</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Les Terres de Nataé · Demo Smeetz internal use only</span>
+  </div>
+</footer>
+
+<div class="demo-banner">🧩 SDK PROTOTYPE 1</div>
+
+</body>
+</html>

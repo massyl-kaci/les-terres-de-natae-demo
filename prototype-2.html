@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Demo site — SDK Prototype 2 — internal use only">
+<title>SDK Demo 2 — Multi-Step Booking · Les Terres de Nataé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="nav-wrapper">
+  <nav>
+    <a href="index.html" class="logo">Les Terres de <span>Nataé</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#billetterie">Billetterie</a></li>
+      <li><a href="index.html#experiences">Expériences</a></li>
+      <li><a href="index.html#pass-annuel">Pass Annuel</a></li>
+      <li><a href="index.html#cse">Entreprises</a></li>
+      <li><a href="bon-cadeau.html">Bon Cadeau</a></li>
+      <li><a href="prototype-1.html" class="sdk-badge">SDK Demo 1</a></li>
+      <li><a href="prototype-2.html" class="sdk-badge" style="background:var(--accent); color:var(--text-dark)">SDK Demo 2</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- SDK Hero -->
+<section class="sdk-hero" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark));">
+  <div class="badge-row">
+    <span class="badge" style="background:var(--secondary); color:white;">Smeetz Elements</span>
+    <span class="badge" style="background:var(--secondary); color:white;">SDK Prototype</span>
+  </div>
+  <h1>Flux <em style="font-family:'Playfair Display'; font-style:italic; color:var(--accent);">multi-étapes guidé</em></h1>
+  <p>Pour les expériences premium et les bons cadeaux — un tunnel de réservation pas-à-pas, avec progression visuelle, personnalisation à chaque étape, et récap dynamique. Idéal pour Soigneur d'un Jour ou Bon Cadeau Nataé.</p>
+</section>
+
+<!-- Steps visualization -->
+<div class="sdk-prototype-placeholder" style="border-color:var(--primary);">
+  <div class="icon-big">🪜</div>
+  <h3>Prototype 2 — Multi-Step Booking Flow</h3>
+  <p>Tunnel guidé en 4 étapes — sélection visuel · personnalisation · participants · paiement. Composé via Smeetz Elements avec progression visuelle (stepper).</p>
+
+  <!-- Stepper visualization -->
+  <div style="display:flex; justify-content:space-between; align-items:center; max-width:700px; margin:2.5rem auto; gap:0.5rem; flex-wrap:wrap;">
+    <div style="text-align:center; flex:1; min-width:120px;">
+      <div style="width:48px; height:48px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; margin:0 auto 0.5rem; box-shadow:var(--shadow-soft);">1</div>
+      <div style="font-size:0.85rem; color:var(--text-dark); font-weight:600;">Visuel</div>
+      <div style="font-size:0.75rem; color:var(--text-muted);">Panda · Panthère · ...</div>
+    </div>
+    <div style="height:2px; flex:1; background:var(--border-light); min-width:20px;"></div>
+    <div style="text-align:center; flex:1; min-width:120px;">
+      <div style="width:48px; height:48px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; margin:0 auto 0.5rem; box-shadow:var(--shadow-soft);">2</div>
+      <div style="font-size:0.85rem; color:var(--text-dark); font-weight:600;">Personnaliser</div>
+      <div style="font-size:0.75rem; color:var(--text-muted);">Destinataire · Message</div>
+    </div>
+    <div style="height:2px; flex:1; background:var(--border-light); min-width:20px;"></div>
+    <div style="text-align:center; flex:1; min-width:120px;">
+      <div style="width:48px; height:48px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; margin:0 auto 0.5rem; box-shadow:var(--shadow-soft);">3</div>
+      <div style="font-size:0.85rem; color:var(--text-dark); font-weight:600;">Montant</div>
+      <div style="font-size:0.75rem; color:var(--text-muted);">Dès 18 €</div>
+    </div>
+    <div style="height:2px; flex:1; background:var(--border-light); min-width:20px;"></div>
+    <div style="text-align:center; flex:1; min-width:120px;">
+      <div style="width:48px; height:48px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; margin:0 auto 0.5rem; box-shadow:var(--shadow-soft);">4</div>
+      <div style="font-size:0.85rem; color:var(--text-dark); font-weight:600;">Paiement</div>
+      <div style="font-size:0.75rem; color:var(--text-muted);">Stripe sécurisé</div>
+    </div>
+  </div>
+
+  <code>
+    &lt;!-- Smeetz Elements multi-step --&gt;<br>
+    &lt;div id="smeetz-booking-stepper"&gt;&lt;/div&gt;<br>
+    &lt;script&gt;<br>
+    &nbsp;&nbsp;SmeetzElements.mount('#smeetz-booking-stepper', {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;productId: '76049', // Bon Cadeau Nataé<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;mode: 'stepper',<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;steps: ['visual', 'personalize', 'amount', 'payment'],<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;theme: 'natae-light',<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;onStep: (i) =&gt; analytics.track('step_'+i)<br>
+    &nbsp;&nbsp;});<br>
+    &lt;/script&gt;
+  </code>
+
+  <div style="margin-top:2rem; padding:1.5rem; background:var(--primary); color:white; border-radius:8px;">
+    <strong style="display:block; margin-bottom:0.5rem; font-family:'Playfair Display';">🎯 Pourquoi montrer ce flux à Nataé</strong>
+    <p style="margin:0; opacity:0.95; font-size:0.95rem;">Démontre que Smeetz Elements gère les flows complexes (gift cards, expériences premium) avec progression visuelle et personnalisation. Différenciateur fort pour le pitch Bon Cadeau face à Qweekle (qui n'a pas d'équivalent visuel).</p>
+  </div>
+</div>
+
+<!-- Step-by-step preview cards -->
+<section class="product-section alt-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Aperçu du flux</span>
+      <h2>4 étapes, design Nataé</h2>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card" style="padding:2rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <div style="width:32px; height:32px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem;">1</div>
+          <h3 style="margin:0;">Choix du visuel</h3>
+        </div>
+        <p>Grille des 4 visuels Bon Cadeau (Panda Roux / Panthère SL / Éléphant d'Asie / Ara Hyacinthe). Sélection au clic, preview live.</p>
+        <div style="background:var(--bg-cream); padding:1rem; border-radius:8px; font-size:0.85rem; color:var(--text-muted); font-family:monospace;">SmeetzElements.VisualPicker</div>
+      </div>
+
+      <div class="product-card" style="padding:2rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <div style="width:32px; height:32px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem;">2</div>
+          <h3 style="margin:0;">Personnalisation</h3>
+        </div>
+        <p>Champs nom du destinataire (requis), message personnalisé (optionnel, 280 caractères). Preview du PDF cadeau temps réel.</p>
+        <div style="background:var(--bg-cream); padding:1rem; border-radius:8px; font-size:0.85rem; color:var(--text-muted); font-family:monospace;">SmeetzElements.CustomFields</div>
+      </div>
+
+      <div class="product-card" style="padding:2rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <div style="width:32px; height:32px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem;">3</div>
+          <h3 style="margin:0;">Montant configurable</h3>
+        </div>
+        <p>Slider ou presets (18 € · 30 € · 50 € · 100 € · custom). Min 18 €, max libre. Affichage de la valeur faciale en temps réel.</p>
+        <div style="background:var(--bg-cream); padding:1rem; border-radius:8px; font-size:0.85rem; color:var(--text-muted); font-family:monospace;">SmeetzElements.AmountSelector</div>
+      </div>
+
+      <div class="product-card" style="padding:2rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <div style="width:32px; height:32px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem;">4</div>
+          <h3 style="margin:0;">Paiement sécurisé</h3>
+        </div>
+        <p>Stripe Elements intégré, support Apple Pay / Google Pay / CB. E-mail de confirmation immédiat avec QR code + PDF Bon Cadeau.</p>
+        <div style="background:var(--bg-cream); padding:1rem; border-radius:8px; font-size:0.85rem; color:var(--text-muted); font-family:monospace;">SmeetzElements.PaymentSheet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why this matters -->
+<section class="product-section">
+  <div class="section-inner">
+    <div class="section-header" style="align-items:center; text-align:center;">
+      <span class="section-eyebrow">Différenciateur démo</span>
+      <h2>Pourquoi ce flux gagne face à Qweekle</h2>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🎨</div>
+        <h3>Personnalisation visuelle</h3>
+        <p>Le destinataire reçoit un PDF design avec le visuel de l'espèce choisie + son prénom. Smeetz Elements génère ce PDF en temps réel — Qweekle envoie juste un QR code générique.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">📊</div>
+        <h3>Analytics par étape</h3>
+        <p>Drop-off rate par step → identifier où l'utilisateur abandonne. Optimisation continue du tunnel. Pas natif chez Qweekle.</p>
+      </div>
+      <div class="product-card" style="padding:2rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔌</div>
+        <h3>Compose your own UX</h3>
+        <p>Mix & match les composants (VisualPicker + AmountSelector + custom step). Vous écrivez le flow qui correspond à votre marque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="cta-band">
+  <h2>Deux flows · une seule plateforme</h2>
+  <p>Widget pour démarrer vite, SDK Elements pour aller plus loin. Smeetz suit votre maturité digitale, pas l'inverse.</p>
+  <a href="prototype-1.html" class="btn-ghost" style="border-color:white;color:white;">Voir le prototype 1</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">Les Terres de <em>Nataé</em></div>
+      <p style="opacity:0.75; font-size:0.92rem;">Parc refuge de Bretagne.</p>
+      <p style="opacity:0.75; font-size:0.85rem; margin-top:1rem;">LDT Kerruisseau<br>56620 Pont-Scorff</p>
+    </div>
+    <div class="footer-col">
+      <h4>Billetterie</h4>
+      <ul>
+        <li><a href="index.html#billetterie">Visite du parc</a></li>
+        <li><a href="index.html#pass-annuel">Pass Annuel</a></li>
+        <li><a href="bon-cadeau.html">Bon Cadeau</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>SDK Prototypes</h4>
+      <ul>
+        <li><a href="prototype-1.html">Prototype 1 — Inline</a></li>
+        <li><a href="prototype-2.html">Prototype 2 — Multi-étapes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Demo</h4>
+      <ul>
+        <li>18 mai 2026</li>
+        <li>WOW face à Qweekle</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Les Terres de Nataé · Demo Smeetz internal use only</span>
+  </div>
+</footer>
+
+<div class="demo-banner">🪜 SDK PROTOTYPE 2</div>
+
+</body>
+</html>
